@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Cliente | Scholl Empreendimentos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:   #141414;
+      --secondary: #B8965A;
+      --accent:    #D4A953;
+      --light:     #F8F5F0;
+      --white:     #FFFFFF;
+      --text:      #2D2D2D;
+      --text-light:#767676;
+      --border:    #E0DAD0;
+      --success:   #10B981;
+      --warning:   #F59E0B;
+      --info:      #3B82F6;
+      --sidebar-w: 260px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--text); min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    /* LAYOUT */
+    .layout { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-w); flex-shrink: 0;
+      background: var(--primary);
+      position: fixed; top: 0; left: 0; bottom: 0;
+      display: flex; flex-direction: column;
+      z-index: 200;
+      transition: transform 0.3s;
+    }
+    .sidebar-header {
+      padding: 28px 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .sidebar-logo { display: flex; align-items: center; gap: 12px; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--secondary);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; color: var(--white);
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 600; color: var(--white); }
+    .logo-sub { font-size: 0.6rem; color: var(--secondary); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+    .sidebar-user {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .user-avatar {
+      width: 44px; height: 44px; background: var(--secondary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--white); font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .user-name { font-size: 0.88rem; font-weight: 600; color: var(--white); }
+    .user-unit { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .sidebar-nav { flex: 1; padding: 16px 0; overflow-y: auto; }
+    .nav-section {
+      font-size: 0.62rem; font-weight: 700; color: rgba(255,255,255,0.2);
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 12px 24px 6px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 24px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.55);
+      cursor: pointer; transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.04); }
+    .nav-item.active { color: var(--secondary); background: rgba(184,150,90,0.08); border-left-color: var(--secondary); }
+    .nav-item-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-footer {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .sidebar-footer a {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.8rem; color: rgba(255,255,255,0.35);
+      transition: color 0.2s;
+    }
+    .sidebar-footer a:hover { color: rgba(255,255,255,0.7); }
+
+    /* MAIN */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1; display: flex; flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: var(--white); height: 64px;
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-title { font-size: 1rem; font-weight: 600; color: var(--primary); }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .topbar-btn {
+      background: none; border: 1px solid var(--border);
+      padding: 7px 14px; border-radius: 6px;
+      font-size: 0.78rem; font-weight: 600; color: var(--text);
+      cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .topbar-btn:hover { border-color: var(--secondary); color: var(--secondary); }
+    .topbar-btn.primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .topbar-btn.primary:hover { background: var(--secondary); border-color: var(--secondary); }
+    .notif { position: relative; cursor: pointer; }
+    .notif-dot {
+      position: absolute; top: -3px; right: -3px;
+      width: 8px; height: 8px; background: #EF4444;
+      border-radius: 50%; border: 2px solid white;
+    }
+
+    /* CONTENT */
+    .content { padding: 32px; flex: 1; }
+
+    /* WELCOME BANNER */
+    .welcome-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, #252525 100%);
+      border-radius: 12px; padding: 28px 32px;
+      margin-bottom: 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+      position: relative; overflow: hidden;
+    }
+    .welcome-banner::before {
+      content: 'CLAVE';
+      position: absolute; right: -20px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem; font-weight: 700;
+      color: rgba(184,150,90,0.08); letter-spacing: 10px;
+      white-space: nowrap; pointer-events: none;
+    }
+    .welcome-left { position: relative; z-index: 1; }
+    .welcome-eyebrow { font-size: 0.7rem; color: var(--secondary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+    .welcome-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: white; }
+    .welcome-sub { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+    .welcome-right { position: relative; z-index: 1; text-align: right; }
+    .obra-pct { font-size: 2.4rem; font-weight: 700; color: var(--secondary); font-family: 'Playfair Display', serif; line-height: 1; }
+    .obra-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+    /* PROGRESS BAR */
+    .progress-wrap { margin-bottom: 28px; }
+    .progress-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px;
+    }
+    .progress-title { font-size: 0.82rem; font-weight: 600; color: var(--primary); }
+    .progress-pct { font-size: 0.82rem; font-weight: 700; color: var(--secondary); }
+    .progress-bar {
+      height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+      transition: width 1s ease;
+    }
+    .progress-steps {
+      display: flex; gap: 0; margin-top: 12px;
+    }
+    .progress-step {
+      flex: 1; text-align: center; font-size: 0.68rem;
+      color: var(--text-light); position: relative;
+    }
+    .progress-step.done { color: var(--secondary); font-weight: 600; }
+    .progress-step.current { color: var(--primary); font-weight: 700; }
+
+    /* CARDS GRID */
+    .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+    .card {
+      background: var(--white); border-radius: 10px;
+      padding: 20px 22px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .card-icon-wrap {
+      width: 44px; height: 44px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 14px;
+    }
+    .card-icon-wrap.gold { background: rgba(184,150,90,0.12); }
+    .card-icon-wrap.green { background: rgba(16,185,129,0.12); }
+    .card-icon-wrap.blue  { background: rgba(59,130,246,0.12); }
+    .card-icon-wrap.warn  { background: rgba(245,158,11,0.12); }
+    .card-label { font-size: 0.72rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .card-value { font-size: 1.6rem; font-weight: 700; color: var(--primary); line-height: 1; font-family: 'Playfair Display', serif; }
+    .card-sub { font-size: 0.75rem; color: var(--text-light); margin-top: 4px; }
+
+    /* TWO-COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .three-col { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .box {
+      background: var(--white); border-radius: 10px;
+      padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .box-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px;
+    }
+    .box-title { font-size: 0.88rem; font-weight: 700; color: var(--primary); }
+    .box-link { font-size: 0.75rem; color: var(--secondary); font-weight: 600; cursor: pointer; }
+    .box-link:hover { text-decoration: underline; }
+
+    /* OBRA TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 16px; }
+    .timeline-item { display: flex; gap: 16px; align-items: flex-start; }
+    .timeline-dot-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .timeline-dot {
+      width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+    }
+    .dot-done    { background: var(--success); }
+    .dot-current { background: var(--secondary); box-shadow: 0 0 0 3px rgba(184,150,90,0.25); }
+    .dot-pending { background: var(--border); border: 2px solid var(--border); }
+    .timeline-line { width: 1px; flex: 1; background: var(--border); min-height: 20px; margin-top: 4px; }
+    .timeline-content { padding-bottom: 4px; flex: 1; }
+    .timeline-date { font-size: 0.7rem; color: var(--text-light); margin-bottom: 2px; }
+    .timeline-title { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
+    .timeline-desc { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; line-height: 1.5; }
+
+    /* PHOTOS GRID */
+    .photos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .photo-thumb {
+      aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; cursor: pointer;
+      position: relative;
+    }
+    .photo-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .photo-thumb:hover img { transform: scale(1.05); }
+    .photo-thumb-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s;
+      font-size: 1.5rem; color: white;
+    }
+    .photo-thumb:hover .photo-thumb-overlay { opacity: 1; }
+
+    /* FINANCEIRO */
+    .financeiro-list { display: flex; flex-direction: column; gap: 10px; }
+    .fin-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 14px; border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .fin-item:nth-child(odd) { background: var(--light); }
+    .fin-item-label { color: var(--text); font-weight: 500; }
+    .fin-item-value { font-weight: 700; }
+    .fin-item-value.pago    { color: var(--success); }
+    .fin-item-value.pendente{ color: var(--warning); }
+    .fin-item-value.futuro  { color: var(--text-light); }
+    .fin-total {
+      border-top: 2px solid var(--border);
+      padding-top: 12px; margin-top: 4px;
+      display: flex; justify-content: space-between;
+      font-weight: 700; font-size: 0.9rem;
+    }
+
+    /* DOCS */
+    .docs-list { display: flex; flex-direction: column; gap: 10px; }
+    .doc-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; border-radius: 6px; border: 1px solid var(--border);
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+    .doc-item:hover { border-color: var(--secondary); }
+    .doc-left { display: flex; align-items: center; gap: 12px; }
+    .doc-icon { font-size: 1.2rem; }
+    .doc-name { font-size: 0.85rem; font-weight: 600; color: var(--primary); }
+    .doc-date { font-size: 0.72rem; color: var(--text-light); margin-top: 1px; }
+    .doc-dl { font-size: 0.75rem; color: var(--secondary); font-weight: 600; }
+
+    /* NOTIFICATION */
+    .notif-list { display: flex; flex-direction: column; gap: 10px; }
+    .notif-item {
+      display: flex; gap: 12px; padding: 12px 14px;
+      border-radius: 6px; border-left: 3px solid var(--border);
+    }
+    .notif-item.new { border-left-color: var(--secondary); background: rgba(184,150,90,0.04); }
+    .notif-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .notif-text { font-size: 0.82rem; color: var(--text); line-height: 1.5; }
+    .notif-time { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
+
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-light); }
+    .empty-state-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .empty-state p { font-size: 0.85rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .three-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .content { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="logo-mark">S</div>
+        <div class="logo-text">
+          <span class="logo-name">Scholl</span>
+          <span class="logo-sub">Portal do Cliente</span>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="avatarInitials">MS</div>
+      <div class="user-name" id="userName">Marcos Silva</div>
+      <div class="user-unit" id="userUnit">Unidade 501-D — CLAVE</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Início</div>
+      <div class="nav-item active" onclick="setTab('dashboard')">
+        <span class="nav-item-icon">📊</span> Dashboard
+      </div>
+      <div class="nav-section">Empreendimento</div>
+      <div class="nav-item" onclick="setTab('obra')">
+        <span class="nav-item-icon">🏗️</span> Acompanhamento de Obra
+      </div>
+      <div class="nav-item" onclick="setTab('fotos')">
+        <span class="nav-item-icon">📷</span> Fotos da Obra
+      </div>
+      <div class="nav-section">Minha Conta</div>
+      <div class="nav-item" onclick="setTab('financeiro')">
+        <span class="nav-item-icon">💰</span> Financeiro
+      </div>
+      <div class="nav-item" onclick="setTab('documentos')">
+        <span class="nav-item-icon">📄</span> Documentos
+      </div>
+      <div class="nav-item" onclick="setTab('contato')">
+        <span class="nav-item-icon">💬</span> Fale Conosco
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html">← Voltar ao site</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-right">
+        <div class="notif" title="Notificações">
+          🔔 <div class="notif-dot"></div>
+        </div>
+        <button class="topbar-btn primary" onclick="window.location='https://wa.me/5551998989927'" target="_blank">
+          💬 Falar com Scholl
+        </button>
+        <button class="topbar-btn" onclick="window.location='index.html'">
+          Sair
+        </button>
+      </div>
+    </header>
+
+    <div class="content" id="content">
+      <!-- DASHBOARD TAB -->
+      <div id="tab-dashboard">
+        <div class="welcome-banner">
+          <div class="welcome-left">
+            <div class="welcome-eyebrow">Bem-vindo ao CLAVE</div>
+            <div class="welcome-title">Olá, <span id="firstName">Marcos</span>! 👋</div>
+            <div class="welcome-sub">Sua unidade 501-D está em andamento. Confira as atualizações abaixo.</div>
+          </div>
+          <div class="welcome-right">
+            <div class="obra-pct">32%</div>
+            <div class="obra-label">Obra concluída</div>
+          </div>
+        </div>
+
+        <div class="progress-wrap box" style="margin-bottom:20px;">
+          <div class="box-header">
+            <div class="box-title">Progresso da Obra — CLAVE</div>
+            <div class="box-link" onclick="setTab('obra')">Ver detalhes</div>
+          </div>
+          <div class="progress-header">
+            <span class="progress-title">Fundações e estrutura</span>
+            <span class="progress-pct">32% concluído</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:32%"></div></div>
+          <div class="progress-steps">
+            <div class="progress-step done">Fundações</div>
+            <div class="progress-step current">Estrutura</div>
+            <div class="progress-step">Alvenaria</div>
+            <div class="progress-step">Instalações</div>
+            <div class="progress-step">Acabamento</div>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-icon-wrap gold">💰</div>
+            <div class="card-label">Próximo vencimento</div>
+            <div class="card-value" style="font-size:1.1rem;">15/06/2026</div>
+            <div class="card-sub">Parcela 8 de 24 — R$ 12.444</div>
+          </div>
+          <div class="card">
+            <div class="card-icon-wrap green">✅</div>
+            <div class="card-label">Parcelas pagas</div>
+            <div class="card-value">7</div>
+            <div class="card-sub">de 24 totais</div>
+          </div>
+          <div class="card">
+            <div class="card-icon-wrap blue">📷</div>
+            <div class="card-label">Fotos esta semana</div>
+            <div class="card-value">12</div>
+            <div class="card-sub">Atualizado em 20/05</div>
+          </div>
+          <div class="card">
+            <div class="card-icon-wrap warn">📋</div>
+            <div class="card-label">Documentos pendentes</div>
+            <div class="card-value">1</div>
+            <div class="card-sub">Assinatura digital aguardada</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="box">
+            <div class="box-header">
+              <div class="box-title">⏱️ Últimas atualizações de obra</div>
+              <div class="box-link" onclick="setTab('obra')">Ver tudo</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot-wrap">
+                  <div class="timeline-dot dot-current"></div>
+                  <div class="timeline-line"></div>
+                </div>
+                <div class="timeline-content">
+                  <div class="timeline-date">20 Mai 2026</div>
+                  <div class="timeline-title">Concretagem do 3º pavimento</div>
+                  <div class="timeline-desc">Laje do 3º pavimento concretada com sucesso. Cura em andamento.</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot-wrap">
+                  <div class="timeline-dot dot-done"></div>
+                  <div class="timeline-line"></div>
+                </div>
+                <div class="timeline-content">
+                  <div class="timeline-date">13 Mai 2026</div>
+                  <div class="timeline-title">Formas 3º pavimento concluídas</div>
+                  <div class="timeline-desc">Montagem de formas concluída conforme projeto estrutural.</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot-wrap">
+                  <div class="timeline-dot dot-done"></div>
+                  <div class="timeline-line"></div>
+                </div>
+                <div class="timeline-content">
+                  <div class="timeline-date">05 Mai 2026</div>
+                  <div class="timeline-title">Concretagem 2º pavimento ✅</div>
+                  <div class="timeline-desc">Concluído dentro do prazo previsto no cronograma.</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot-wrap">
+                  <div class="timeline-dot dot-pending"></div>
+                </div>
+                <div class="timeline-content">
+                  <div class="timeline-date">Previsto: Jun 2026</div>
+                  <div class="timeline-title">Conclusão do 4º pavimento</div>
+                  <div class="timeline-desc">Próxima etapa segundo o cronograma da obra.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box">
+            <div class="box-header">
+              <div class="box-title">🔔 Notificações</div>
+            </div>
+            <div class="notif-list">
+              <div class="notif-item new">
+                <div class="notif-icon">📷</div>
+                <div>
+                  <div class="notif-text">12 novas fotos da obra foram adicionadas.</div>
+                  <div class="notif-time">Hoje, 14:30</div>
+                </div>
+              </div>
+              <div class="notif-item new">
+                <div class="notif-icon">📄</div>
+                <div>
+                  <div class="notif-text">Contrato de compra e venda disponível para assinatura digital.</div>
+                  <div class="notif-time">Ontem, 09:15</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon">💰</div>
+                <div>
+                  <div class="notif-text">Parcela 7 confirmada. Obrigado!</div>
+                  <div class="notif-time">15 Mai 2026</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon">📊</div>
+                <div>
+                  <div class="notif-text">Relatório mensal de obra — Abril/2026 disponível.</div>
+                  <div class="notif-time">02 Mai 2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OBRA TAB -->
+      <div id="tab-obra" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary);margin-bottom:24px;">
+          🏗️ Acompanhamento de Obra
+        </h2>
+        <div class="box" style="margin-bottom:20px;">
+          <div class="box-header">
+            <div class="box-title">Cronograma — CLAVE (Chácara das Pedras, POA)</div>
+          </div>
+          <div class="progress-bar" style="height:12px;margin-bottom:12px;"><div class="progress-fill" style="width:32%"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--text-light);">
+            <span>Início: Novembro 2024</span>
+            <span style="color:var(--secondary);font-weight:700;">32% concluído</span>
+            <span>Previsão: Dezembro 2026</span>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-header">
+            <div class="box-title">Histórico Detalhado</div>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-done"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Nov 2024</div>
+                <div class="timeline-title">Início da Incorporação ✅</div>
+                <div class="timeline-desc">Memorial de Incorporação, SPE constituída, projetos aprovados.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-done"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Jan 2025</div>
+                <div class="timeline-title">Fundações e Contenções ✅</div>
+                <div class="timeline-desc">Micro estacas e blocos de coroamento executados. Laudo de vizinhança emitido.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-done"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Abr 2025</div>
+                <div class="timeline-title">Lançamento Comercial ✅</div>
+                <div class="timeline-desc">Evento de lançamento com investidores. 1 unidade permutada (terreno).</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-done"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Set 2025</div>
+                <div class="timeline-title">Estrutura 1º Pavimento ✅</div>
+                <div class="timeline-desc">Concretagem das lajes do 1º pavimento concluída.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-done"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Jan 2026</div>
+                <div class="timeline-title">Estrutura 2º Pavimento ✅</div>
+                <div class="timeline-desc">Formas, armação e concretagem da laje do 2º pavimento.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-current"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Mai 2026 — Em andamento</div>
+                <div class="timeline-title">Estrutura 3º e 4º Pavimento 🔄</div>
+                <div class="timeline-desc">3º pavimento concretado. Formas do 4º pavimento em execução.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-pending"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Ago 2026</div>
+                <div class="timeline-title">Alvenaria e Instalações</div>
+                <div class="timeline-desc">Vedação, instalações hidráulicas, elétricas e de gás.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-pending"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Nov 2026</div>
+                <div class="timeline-title">Acabamento e Revestimentos</div>
+                <div class="timeline-desc">Pisos, revestimentos de fachada, esquadrias e acabamentos.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-wrap"><div class="timeline-dot dot-pending"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Dez 2026</div>
+                <div class="timeline-title">Habite-se e Entrega das Chaves 🔑</div>
+                <div class="timeline-desc">AGI, habite-se, vistoria e entrega das chaves aos proprietários.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOTOS TAB -->
+      <div id="tab-fotos" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary);margin-bottom:24px;">📷 Fotos da Obra</h2>
+        <div class="box" style="margin-bottom:20px;">
+          <div class="box-header">
+            <div class="box-title">Semana de 20/05/2026</div>
+            <div class="box-link">12 fotos</div>
+          </div>
+          <div class="photos-grid">
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=70" alt="Obra 1" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400&q=70" alt="Obra 2" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1582495037309-05b9f23f5eb0?w=400&q=70" alt="Obra 3" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&q=70" alt="Obra 4" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1541976590-713941681591?w=400&q=70" alt="Obra 5" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=400&q=70" alt="Obra 6" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-header">
+            <div class="box-title">Semana de 13/05/2026</div>
+            <div class="box-link">8 fotos</div>
+          </div>
+          <div class="photos-grid">
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=70" alt="Obra 7" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=70" alt="Obra 8" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+            <div class="photo-thumb"><img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=400&q=70" alt="Obra 9" loading="lazy"><div class="photo-thumb-overlay">🔍</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCEIRO TAB -->
+      <div id="tab-financeiro" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary);margin-bottom:24px;">💰 Financeiro</h2>
+        <div class="cards-grid" style="margin-bottom:20px;">
+          <div class="card"><div class="card-icon-wrap green">✅</div><div class="card-label">Valor pago até hoje</div><div class="card-value" style="font-size:1.1rem;">R$ 87.108</div></div>
+          <div class="card"><div class="card-icon-wrap warn">⏳</div><div class="card-label">Saldo devedor</div><div class="card-value" style="font-size:1.1rem;">R$ 1.468.212</div></div>
+          <div class="card"><div class="card-icon-wrap blue">📅</div><div class="card-label">Próximo vencimento</div><div class="card-value" style="font-size:0.95rem;">15/06/2026</div><div class="card-sub">R$ 12.444</div></div>
+          <div class="card"><div class="card-icon-wrap gold">📊</div><div class="card-label">Progresso do financeiro</div><div class="card-value">5,6%</div><div class="card-sub">7 de 24 parcelas</div></div>
+        </div>
+        <div class="box">
+          <div class="box-header"><div class="box-title">Extrato de Parcelas</div></div>
+          <div class="financeiro-list">
+            <div class="fin-item"><span class="fin-item-label">Entrada — Nov 2024</span><span class="fin-item-value pago">R$ 27.660 ✓</span></div>
+            <div class="fin-item"><span class="fin-item-label">Parcela 1 — Dez 2024</span><span class="fin-item-value pago">R$ 12.444 ✓</span></div>
+            <div class="fin-item"><span class="fin-item-label">Parcela 2 — Jan 2025</span><span class="fin-item-value pago">R$ 12.444 ✓</span></div>
+            <div class="fin-item"><span class="fin-item-label">Parcela 3 — Fev 2025</span><span class="fin-item-value pago">R$ 12.444 ✓</span></div>
+            <div class="fin-item"><span class="fin-item-label">Parcela 4 — Mar 2025</span><span class="fin-item-value pago">R$ 12.444 ✓</span></div>
+            <div class="fin-item"><span class="fin-item-label">Parcela 5 — Abr 2025</span><span class="fin-item-value pago">R$ 12.444 ✓</span></div>
+            <div class="fin-item"><span class="fin-item-label">Parcela 6 — Mai 2025</span><span class="fin-item-value pago">R$ 12.444 ✓</span></div>
+            <div class="fin-item"><span class="fin-item-label">Parcela 7 — Mai 2026</span><span class="fin-item-value pago">R$ 12.444 ✓</span></div>
+            <div class="fin-item" style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);">
+              <span class="fin-item-label" style="font-weight:700;">⚠️ Parcela 8 — Jun 2026</span>
+              <span class="fin-item-value pendente">R$ 12.444 — Vence 15/06</span>
+            </div>
+            <div class="fin-item"><span class="fin-item-label">Parcelas 9–24 — Jul 2026 a Dez 2027</span><span class="fin-item-value futuro">R$ 199.104 (a vencer)</span></div>
+            <div class="fin-item"><span class="fin-item-label" style="font-weight:700;">Chaves / Repasse — Dez 2026</span><span class="fin-item-value futuro">R$ 1.269.108 (a vencer)</span></div>
+          </div>
+          <div class="fin-total">
+            <span>Total da unidade</span>
+            <span>R$ 1.555.320</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTOS TAB -->
+      <div id="tab-documentos" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary);margin-bottom:24px;">📄 Documentos</h2>
+        <div class="box">
+          <div class="box-header"><div class="box-title">Documentos da Incorporação</div></div>
+          <div class="docs-list">
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div class="doc-icon">📋</div><div><div class="doc-name">Contrato de Compra e Venda — Unidade 501-D</div><div class="doc-date">Adicionado em 01/06/2025 — Aguardando sua assinatura</div></div></div>
+              <div class="doc-dl" style="color:var(--warning);">⚠️ Assinar</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div class="doc-icon">🏢</div><div><div class="doc-name">Memorial de Incorporação — CLAVE</div><div class="doc-date">Adicionado em 15/11/2024</div></div></div>
+              <div class="doc-dl">⬇️ Baixar</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div class="doc-icon">📐</div><div><div class="doc-name">Planta da Unidade 501-D (aprovada)</div><div class="doc-date">Adicionado em 20/11/2024</div></div></div>
+              <div class="doc-dl">⬇️ Baixar</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div class="doc-icon">📊</div><div><div class="doc-name">Relatório de Obra — Abril 2026</div><div class="doc-date">Adicionado em 02/05/2026</div></div></div>
+              <div class="doc-dl">⬇️ Baixar</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div class="doc-icon">📊</div><div><div class="doc-name">Relatório de Obra — Março 2026</div><div class="doc-date">Adicionado em 02/04/2026</div></div></div>
+              <div class="doc-dl">⬇️ Baixar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTATO TAB -->
+      <div id="tab-contato" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary);margin-bottom:24px;">💬 Fale Conosco</h2>
+        <div class="two-col">
+          <div class="box">
+            <div class="box-header"><div class="box-title">Enviar mensagem</div></div>
+            <form onsubmit="enviarMsg(event)" style="display:flex;flex-direction:column;gap:12px;">
+              <select style="padding:12px;border:1px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:0.88rem;">
+                <option>Dúvida sobre a obra</option>
+                <option>Questão financeira</option>
+                <option>Solicitação de documento</option>
+                <option>Outro</option>
+              </select>
+              <textarea style="padding:12px;border:1px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:0.88rem;min-height:120px;resize:vertical;" placeholder="Descreva sua dúvida ou solicitação…"></textarea>
+              <button style="padding:13px;background:var(--primary);color:white;border:none;border-radius:6px;font-size:0.88rem;font-weight:700;cursor:pointer;" type="submit">Enviar mensagem →</button>
+            </form>
+          </div>
+          <div class="box">
+            <div class="box-header"><div class="box-title">Contatos diretos</div></div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div style="padding:16px;background:var(--light);border-radius:6px;">
+                <div style="font-size:0.72rem;color:var(--secondary);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">WhatsApp</div>
+                <a href="https://wa.me/5551998989927" target="_blank" style="font-size:0.95rem;font-weight:600;color:var(--primary);">(51) 99898-9927</a>
+                <div style="font-size:0.78rem;color:var(--text-light);margin-top:4px;">Seg–Sex 9h–18h · Sáb 9h–13h</div>
+              </div>
+              <div style="padding:16px;background:var(--light);border-radius:6px;">
+                <div style="font-size:0.72rem;color:var(--secondary);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">E-mail</div>
+                <div style="font-size:0.92rem;font-weight:600;color:var(--primary);">filipescholl@gmail.com</div>
+              </div>
+              <div style="padding:16px;background:var(--light);border-radius:6px;">
+                <div style="font-size:0.72rem;color:var(--secondary);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Escritório</div>
+                <div style="font-size:0.85rem;color:var(--text);">Av. Primeiro de Março, 219 — Sala 309<br>Novo Hamburgo, RS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<div class="toast" id="toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--primary);color:white;padding:12px 22px;border-radius:6px;font-size:0.85rem;box-shadow:0 8px 28px rgba(0,0,0,0.3);transition:transform 0.3s;z-index:3000;"></div>
+
+<script>
+  const tabs = ['dashboard','obra','fotos','financeiro','documentos','contato'];
+  const tabTitles = { dashboard:'Dashboard', obra:'Acompanhamento de Obra', fotos:'Fotos da Obra', financeiro:'Financeiro', documentos:'Documentos', contato:'Fale Conosco' };
+
+  function setTab(name) {
+    tabs.forEach(t => {
+      document.getElementById('tab-' + t).style.display = (t === name) ? '' : 'none';
+    });
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(el => { if (el.getAttribute('onclick') && el.getAttribute('onclick').includes(name)) el.classList.add('active'); });
+    document.getElementById('topbarTitle').textContent = tabTitles[name] || name;
+  }
+
+  function enviarMsg(e) {
+    e.preventDefault();
+    showToast('✅ Mensagem enviada! Retornaremos em breve.');
+    e.target.reset();
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(() => t.style.transform = 'translateX(-50%) translateY(100px)', 3500);
+  }
+
+  // Animate progress bar on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.progress-fill').forEach(el => el.style.width = el.style.width);
+    }, 300);
+  });
+</script>
+</body>
+</html>
