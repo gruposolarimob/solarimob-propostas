@@ -9,10 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary:   #0D0F14;
-      --secondary: #B8965A;
-      --accent:    #D4A953;
-      --light:     #F8F5F0;
+      --primary:   #312E2C;
+      --secondary: #DCFDA4;
+      --accent:    #c8f07a;
+      --light:     #F5F2ED;
       --white:     #FFFFFF;
       --text:      #2D2D2D;
       --text-light:#767676;
@@ -63,7 +63,7 @@
     /* HERO */
     #hero {
       min-height: 100vh;
-      background: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=80') center/cover no-repeat;
+      background: url('https://drive.google.com/thumbnail?id=1FlbOopOIHw8E9-NttMjxnxHKFhXdzrcY&sz=w1920') center/cover no-repeat, url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=80') center/cover no-repeat;
       position: relative;
       display: flex; align-items: flex-end;
     }
@@ -113,7 +113,7 @@
     }
     .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn-gold {
-      background: var(--secondary); color: var(--white);
+      background: var(--secondary); color: var(--primary);
       padding: 16px 36px; border-radius: 3px;
       font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px;
       transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
@@ -381,14 +381,12 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <div class="logo-mark">S</div>
-      <div class="logo-text">
-        <span class="logo-name">Scholl</span>
-        <span class="logo-sub">Empreendimentos</span>
-      </div>
+    <a href="index.html" class="logo" style="gap:0">
+      <img src="assets/logos/scholl-branco.svg" alt="Scholl Empreendimentos" style="height:28px;width:auto;filter:brightness(0) invert(1);opacity:0.85;">
     </a>
-    <div class="nav-project">CLAVE</div>
+    <div class="nav-project">
+      <img src="assets/logos/clave-branco.svg" alt="CLAVE" style="height:22px;width:auto;filter:brightness(0) invert(1);opacity:0.9">
+    </div>
     <ul class="nav-links">
       <li><a href="#sobre">O Empreendimento</a></li>
       <li><a href="#localizacao">Localização</a></li>
@@ -477,9 +475,21 @@
         </div>
       </div>
       <div class="sobre-imgs">
-        <img class="img-tall" src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&q=80" alt="CLAVE fachada" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&q=80" alt="CLAVE interior" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=400&q=80" alt="CLAVE detalhe" loading="lazy">
+        <img class="img-tall"
+          src="https://drive.google.com/thumbnail?id=1ukxHhw9qZ6urwouUiDen8w5HpovyjOIM&sz=w800"
+          alt="CLAVE Fachada Diurna"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&q=80'">
+        <img
+          src="https://drive.google.com/thumbnail?id=1nKB3O2TFuGPOK1Wpo5K2bE34UbDF_6tw&sz=w600"
+          alt="CLAVE Garden"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&q=80'">
+        <img
+          src="https://drive.google.com/thumbnail?id=1JCOfQgzCvJyDP3O37G0duFYjiWJuk-yJ&sz=w600"
+          alt="CLAVE Salão de Festas"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=400&q=80'">
       </div>
     </div>
   </div>

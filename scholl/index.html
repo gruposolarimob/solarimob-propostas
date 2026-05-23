@@ -13,17 +13,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary:    #141414;
+      --primary:    #312E2C;
       --secondary:  #B8965A;
-      --accent:     #D4A953;
-      --accent-light: #F0D49A;
-      --light:      #F8F5F0;
+      --accent:     #DCFDA4;
+      --accent-light: #EEF9CC;
+      --light:      #F5F2ED;
       --cream:      #EDE9E2;
       --white:      #FFFFFF;
       --text:       #2D2D2D;
       --text-light: #767676;
       --border:     #E0DAD0;
-      --overlay:    rgba(20,20,20,0.72);
+      --overlay:    rgba(49,46,44,0.75);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -820,12 +820,8 @@
 <!-- ─── NAVIGATION ─────────────────────────────────────────── -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-mark">S</div>
-      <div class="logo-text">
-        <span class="logo-name">Scholl</span>
-        <span class="logo-sub">Empreendimentos</span>
-      </div>
+    <a href="#" class="logo" style="gap:0">
+      <img src="assets/logos/scholl-branco.svg" alt="Scholl Empreendimentos" style="height:36px;width:auto;filter:brightness(0) invert(1);">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#sobre">Sobre</a></li>
@@ -954,9 +950,10 @@
         <div class="emp-img-wrap">
           <img
             class="emp-img"
-            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80"
+            src="https://drive.google.com/thumbnail?id=1ukxHhw9qZ6urwouUiDen8w5HpovyjOIM&sz=w800"
             alt="CLAVE – Chácara das Pedras"
             loading="lazy"
+            onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80'"
           >
           <span class="emp-badge badge-lancamento">Em Lançamento</span>
         </div>
@@ -1325,12 +1322,8 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="footer-logo">
-        <div class="logo-mark">S</div>
-        <div class="logo-text">
-          <span class="logo-name">Scholl</span>
-          <span class="logo-sub">Empreendimentos</span>
-        </div>
+      <div class="footer-logo" style="margin-bottom:20px">
+        <img src="assets/logos/scholl-branco.svg" alt="Scholl Empreendimentos" style="height:30px;width:auto;filter:brightness(0) invert(1);opacity:0.85">
       </div>
       <p class="footer-desc">
         Incorporadora de alto padrão no Sul do Brasil. Comprometida com
@@ -1386,11 +1379,8 @@
     <button class="modal-close" onclick="closePortal()">✕</button>
     <div class="modal-logo">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="logo-mark" style="width:36px;height:36px;font-size:1rem;">S</div>
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:0.95rem;color:var(--primary);">Scholl Empreendimentos</div>
-          <div style="font-size:0.65rem;color:var(--secondary);letter-spacing:2px;text-transform:uppercase;">Área Restrita</div>
-        </div>
+        <img src="assets/logos/scholl-preto.svg" alt="Scholl" style="height:28px;width:auto;">
+        <div style="font-size:0.65rem;color:var(--secondary);letter-spacing:2px;text-transform:uppercase;margin-left:4px;">Área Restrita</div>
       </div>
     </div>
     <h2>Bem-vindo de volta</h2>
