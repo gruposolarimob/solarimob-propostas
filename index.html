@@ -270,6 +270,8 @@
       box-shadow: 0 0 0 3px rgba(27,52,102,0.1);
     }
     .form-input::placeholder { color: #9CA3AF; }
+    textarea.form-input { resize: vertical; min-height: 110px; line-height: 1.55; }
+    .field-hint { margin-top: 0.35rem; font-size: 0.75rem; color: var(--gray); line-height: 1.4; }
 
     /* File upload */
     .upload-area {
@@ -401,7 +403,7 @@
 <!-- ── HEADER ── -->
 <header>
   <a href="#" class="logo">
-    <img src="logo-nome.png" alt="Grupo Solarimob" style="height:52px;display:block;border-radius:8px;">
+    <img src="logo-header.svg" alt="Grupo Solarimob" style="height:48px;display:block;">
   </a>
   <a href="#formulario" class="btn-header">Solicitar proposta →</a>
 </header>
@@ -538,6 +540,19 @@
             <div class="upload-text">PDF, JPG ou PNG · máx. 5 MB</div>
             <div class="upload-filename" id="file-label"></div>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="observacoes">
+            Observações <span class="opt">(opcional)</span>
+          </label>
+          <textarea class="form-input" id="observacoes" name="observacoes" rows="4"
+                    placeholder="Conte-nos mais detalhes para sua proposta ser ainda mais precisa. Por exemplo:
+• Tipo de telhado (cerâmico, metálico, fibrocimento, laje…)
+• Se planeja aumentar o consumo (ar-condicionado, veículo elétrico…)
+• Localização / cidade e estado
+• Qualquer outra informação que queira compartilhar"></textarea>
+          <p class="field-hint">Quanto mais detalhes você fornecer, mais personalizada e precisa será a sua proposta.</p>
         </div>
 
         <button type="submit" class="btn-submit" id="btn-submit">
