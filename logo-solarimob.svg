@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 52" fill="none" role="img" aria-label="Grupo Solarimob">
+  <!-- Sol (desenhado primeiro; o telhado cobre a parte de baixo) -->
+  <circle cx="48" cy="15" r="14" fill="#F0A500"/>
+  <!-- Telhado: pico esquerdo + rampa plana à direita, 1 polígono único -->
+  <polygon points="4,44 22,9 31,23 60,23 68,44" fill="white"/>
+  <!-- "GRUPO" pequeno -->
+  <text x="82" y="18"
+        font-family="'Arial Black','Arial Bold',Arial,sans-serif"
+        font-size="9.5" font-weight="900" fill="rgba(255,255,255,0.78)"
+        letter-spacing="4.5">GRUPO</text>
+  <!-- "SOLARIMOB" grande -->
+  <text x="82" y="43"
+        font-family="'Arial Black','Arial Bold',Arial,sans-serif"
+        font-size="22" font-weight="900" fill="white"
+        letter-spacing="0.2">SOLARIMOB</text>
+</svg>

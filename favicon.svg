@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Fundo navy com cantos arredondados (igual à logo no fundo escuro) -->
+  <rect width="100" height="100" rx="18" fill="#1B3466"/>
+  <!-- Sol -->
+  <circle cx="67" cy="30" r="22" fill="#F0A500"/>
+  <!-- Telhado: pico esquerdo + rampa plana -->
+  <polygon points="8,72 34,20 46,42 84,42 94,72" fill="white"/>
+</svg>
