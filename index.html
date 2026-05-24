@@ -378,11 +378,7 @@
 <!-- ── HEADER ── -->
 <header>
   <a href="#" class="logo">
-    <div class="logo-badge">☀️</div>
-    <div class="logo-text">
-      <span class="logo-name">Grupo Solarimob</span>
-      <span class="logo-sub">Energia Solar</span>
-    </div>
+    <img src="logo-branco.svg" alt="Grupo Solarimob" style="height:44px;display:block;">
   </a>
   <a href="#formulario" class="btn-header">Solicitar proposta →</a>
 </header>
@@ -394,7 +390,7 @@
     <h1>Economize até <span class="highlight">95%</span> na sua<br>conta de energia</h1>
     <p>Com o Grupo Solarimob você investe uma vez e economiza por décadas. Projeto personalizado, instalação profissional e suporte completo.</p>
     <a href="#formulario" class="btn-hero">☀️ Quero minha proposta grátis</a>
-    <p class="hero-note">Análise gratuita · Sem compromisso · Retorno em até 4 anos</p>
+    <p class="hero-note">Análise gratuita · Sem compromisso · Sem obras invasivas</p>
   </div>
 </section>
 
@@ -402,18 +398,19 @@
 <section class="stats-bar">
   <div class="stats-grid">
     <div class="stat-divider">
-      <div class="stat-number"><span class="accent">+</span>500</div>
+      <div class="stat-number"><span class="accent">+</span>200</div>
       <div class="stat-desc">clientes atendidos</div>
     </div>
     <div class="stat-divider">
       <div class="stat-number">95<span class="accent">%</span></div>
-      <div class="stat-desc">de economia na fatura</div>
+      <div class="stat-desc">de redução potencial na fatura*</div>
     </div>
     <div>
       <div class="stat-number">25<span class="accent">+</span></div>
       <div class="stat-desc">anos de vida útil dos painéis</div>
     </div>
   </div>
+  <p style="text-align:center;font-size:0.68rem;color:#9CA3AF;margin-top:1rem;max-width:840px;margin-left:auto;margin-right:auto;padding:0 1rem">* Redução calculada sobre o valor da energia ativa consumida. Custos de disponibilidade e encargos da distribuidora continuam aplicáveis conforme a Lei 14.300/2022.</p>
 </section>
 
 <!-- ── BENEFITS ── -->
@@ -425,8 +422,8 @@
   <div class="benefits-grid">
     <div class="benefit-card">
       <div class="benefit-icon">💰</div>
-      <div class="benefit-title">Economia Garantida</div>
-      <div class="benefit-desc">Reduza sua conta de energia em até 95% a partir do primeiro mês de operação do sistema.</div>
+      <div class="benefit-title">Economia Expressiva</div>
+      <div class="benefit-desc">Reduza sua conta de energia em até 95% a partir do primeiro mês — resultado varia conforme consumo e irradiação local.</div>
     </div>
     <div class="benefit-card">
       <div class="benefit-icon">🌱</div>
@@ -480,13 +477,14 @@
 
   <div class="form-card">
     <div id="form-wrap">
-      <div class="form-error" id="form-error">
-        Ocorreu um erro ao enviar. Por favor, tente novamente ou nos contate diretamente em
-        <a href="mailto:grupo@solarimob.com.br">grupo@solarimob.com.br</a>.
-      </div>
+      <div class="form-error" id="form-error"></div>
 
-      <!-- FormSubmit.co: first submission triggers email activation from grupo@solarimob.com.br -->
-      <form id="contact-form" novalidate>
+      <form id="contact-form" action="https://formsubmit.co/grupo@solarimob.com.br" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="Nova solicitação de proposta solar – Solarimob">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="next-url" value="">
+
         <div class="form-group">
           <label class="field-label" for="nome">Nome completo</label>
           <input class="form-input" type="text" id="nome" name="nome"
@@ -539,10 +537,23 @@
 <footer>
   <p><strong>Grupo Solarimob</strong> · Energia Solar Fotovoltaica</p>
   <p>Novo Hamburgo – RS · <a href="mailto:grupo@solarimob.com.br">grupo@solarimob.com.br</a></p>
-  <p style="margin-top:0.5rem;font-size:0.72rem">© 2025 Grupo Solarimob. Todos os direitos reservados.</p>
+  <p style="margin-top:0.5rem;font-size:0.72rem">© 2026 Grupo Solarimob. Todos os direitos reservados.</p>
 </footer>
 
 <script>
+  /* Set FormSubmit redirect URL dynamically */
+  document.getElementById('next-url').value =
+    window.location.href.split('?')[0] + '?enviado=1';
+
+  /* Show success state if redirected back after submission */
+  if (new URLSearchParams(window.location.search).get('enviado') === '1') {
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('form-success').classList.add('show');
+    setTimeout(function () {
+      document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+
   /* Phone mask */
   document.getElementById('telefone').addEventListener('input', function () {
     let v = this.value.replace(/\D/g, '').slice(0, 11);
@@ -579,61 +590,21 @@
     }
   }
 
-  /* Form submit via FormSubmit.co AJAX */
-  document.getElementById('contact-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const errorEl  = document.getElementById('form-error');
-    const btn      = document.getElementById('btn-submit');
-    const btnText  = document.getElementById('btn-text');
+  /* Client-side validation before native form POST */
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    const errorEl = document.getElementById('form-error');
     errorEl.classList.remove('show');
-
-    /* Basic validation */
     const nome     = document.getElementById('nome').value.trim();
     const email    = document.getElementById('email').value.trim();
     const telefone = document.getElementById('telefone').value.trim();
     if (!nome || !email || !telefone) {
+      e.preventDefault();
       errorEl.textContent = 'Por favor, preencha todos os campos obrigatórios.';
       errorEl.classList.add('show');
       return;
     }
-
-    btn.disabled = true;
-    btnText.textContent = 'Enviando…';
-
-    const formData = new FormData();
-    formData.append('nome',     nome);
-    formData.append('email',    email);
-    formData.append('telefone', telefone);
-    formData.append('_subject', 'Nova solicitação de proposta solar – Solarimob');
-    formData.append('_template','table');
-    formData.append('_captcha', 'false');
-
-    const faturaInput = document.getElementById('fatura');
-    if (faturaInput.files && faturaInput.files[0]) {
-      formData.append('fatura', faturaInput.files[0]);
-    }
-
-    try {
-      const res = await fetch('https://formsubmit.co/ajax/grupo@solarimob.com.br', {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (res.ok) {
-        document.getElementById('form-wrap').style.display = 'none';
-        document.getElementById('form-success').classList.add('show');
-      } else {
-        throw new Error('HTTP ' + res.status);
-      }
-    } catch (err) {
-      btn.disabled = false;
-      btnText.textContent = '☀️ Solicitar proposta gratuita';
-      errorEl.textContent =
-        'Ocorreu um erro ao enviar. Por favor, tente novamente ou nos contate em grupo@solarimob.com.br.';
-      errorEl.classList.add('show');
-    }
+    document.getElementById('btn-submit').disabled = true;
+    document.getElementById('btn-text').textContent = 'Enviando…';
   });
 </script>
 </body>
