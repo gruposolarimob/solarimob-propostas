@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand Colors */
+  --color-solar: #f59e0b;
+  --color-solar-dark: #d97706;
+  --color-solar-light: #fde68a;
+  --color-navy: #1e3a5f;
+  --color-navy-dark: #132847;
+  --color-navy-light: #2d5491;
+  --color-eco: #16a34a;
+  --color-eco-light: #dcfce7;
+
+  /* Neutral */
+  --color-surface: #f8fafc;
+  --color-surface-dark: #f1f5f9;
+  --color-border: #e2e8f0;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  color: #1f2937;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Gradients utilities */
+.gradient-solar {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5491 50%, #1e3a5f 100%);
+}
+
+.gradient-hero {
+  background: linear-gradient(135deg, #132847 0%, #1e3a5f 40%, #2d5491 100%);
+}
+
+.gradient-solar-accent {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+/* Text gradient */
+.text-gradient-solar {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-solar {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+}
+
+.animate-pulse-solar {
+  animation: pulse-solar 2s ease-in-out infinite;
+}
