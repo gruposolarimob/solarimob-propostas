@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scholl Empreendimentos | Incorporadora de Alto Padrão</title>
+  <meta name="description" content="Scholl Empreendimentos Imobiliários — Incorporadora de alto padrão em Novo Hamburgo e Porto Alegre. Transparência, qualidade e rentabilidade em cada projeto.">
+  <meta property="og:title" content="Scholl Empreendimentos">
+  <meta property="og:description" content="Incorporadora de alto padrão no Sul do Brasil">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:    #312E2C;
+      --secondary:  #B8965A;
+      --accent:     #DCFDA4;
+      --accent-light: #EEF9CC;
+      --light:      #F5F2ED;
+      --cream:      #EDE9E2;
+      --white:      #FFFFFF;
+      --text:       #2D2D2D;
+      --text-light: #767676;
+      --border:     #E0DAD0;
+      --overlay:    rgba(49,46,44,0.75);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: var(--primary);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.3);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .logo-mark {
+      width: 44px; height: 44px;
+      background: var(--secondary);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: -1px;
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--white); letter-spacing: 1px;
+      line-height: 1;
+    }
+    .logo-sub {
+      font-size: 0.62rem; color: var(--secondary);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-top: 3px;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.78);
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--secondary); color: var(--white) !important;
+      padding: 10px 22px; border-radius: 3px;
+      font-size: 0.78rem !important; font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; }
+    .nav-burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: white; transition: all 0.3s; }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=80') center/cover no-repeat;
+      position: relative;
+      display: flex; align-items: center;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(14,14,14,0.85) 0%, rgba(14,14,14,0.60) 60%, rgba(20,20,20,0.40) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto; padding: 0 40px;
+      padding-top: 80px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--secondary);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 40px; height: 1px;
+      background: var(--secondary);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700; line-height: 1.08;
+      color: var(--white);
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+    .hero-title em { color: var(--accent); font-style: normal; }
+    .hero-desc {
+      font-size: 1.05rem; font-weight: 300; line-height: 1.75;
+      color: rgba(255,255,255,0.72);
+      max-width: 520px;
+      margin-bottom: 48px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--secondary);
+      color: var(--white);
+      padding: 16px 36px; border-radius: 3px;
+      font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.25s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      padding: 16px 36px; border-radius: 3px;
+      font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: all 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--secondary); color: var(--secondary); }
+    .hero-stats {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stats-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 40px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .hero-stat {
+      padding: 28px 0;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--white); line-height: 1;
+    }
+    .hero-stat-value span { color: var(--secondary); }
+    .hero-stat-label {
+      font-size: 0.72rem; font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-top: 6px;
+    }
+
+    /* ─── SECTIONS COMMON ─────────────────────────────── */
+    section { padding: 100px 40px; }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--secondary);
+      margin-bottom: 20px;
+    }
+    .section-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 1px;
+      background: var(--secondary);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--primary);
+    }
+    .section-title em { color: var(--secondary); font-style: normal; }
+    .divider {
+      width: 56px; height: 3px;
+      background: var(--secondary);
+      margin: 20px 0 36px;
+    }
+
+    /* ─── SOBRE ─────────────────────────────────────────── */
+    #sobre { background: var(--light); }
+    .sobre-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .sobre-visual {
+      position: relative;
+    }
+    .sobre-img {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover; border-radius: 2px;
+    }
+    .sobre-badge {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--secondary);
+      color: var(--white);
+      padding: 28px 32px; border-radius: 2px;
+      text-align: center;
+    }
+    .sobre-badge-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 700; line-height: 1;
+      display: block;
+    }
+    .sobre-badge-text {
+      font-size: 0.72rem; letter-spacing: 1.5px;
+      text-transform: uppercase; opacity: 0.85;
+      display: block; margin-top: 4px;
+    }
+    .sobre-text p {
+      font-size: 1rem; line-height: 1.85;
+      color: var(--text-light); margin-bottom: 20px;
+    }
+    .sobre-values {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      margin-top: 40px;
+    }
+    .sobre-value {
+      background: var(--white);
+      padding: 24px 20px; border-radius: 2px;
+      border-left: 3px solid var(--secondary);
+    }
+    .sobre-value-title {
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--secondary); margin-bottom: 6px;
+    }
+    .sobre-value-text {
+      font-size: 0.85rem; color: var(--text-light); line-height: 1.6;
+    }
+
+    /* ─── EMPREENDIMENTOS ───────────────────────────────── */
+    #empreendimentos { background: var(--white); }
+    .emp-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 56px; flex-wrap: wrap; gap: 20px;
+    }
+    .emp-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 32px;
+    }
+    .emp-card {
+      border-radius: 2px; overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .emp-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+    }
+    .emp-img-wrap {
+      position: relative; overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+    .emp-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .emp-card:hover .emp-img { transform: scale(1.04); }
+    .emp-badge {
+      position: absolute; top: 20px; left: 20px;
+      padding: 5px 14px; border-radius: 2px;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .badge-lancamento { background: var(--secondary); color: var(--white); }
+    .badge-entregue   { background: var(--white); color: var(--primary); }
+    .badge-breve      { background: var(--primary); color: var(--accent); }
+    .emp-body { padding: 32px; }
+    .emp-city {
+      font-size: 0.72rem; color: var(--secondary);
+      letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .emp-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem; font-weight: 700;
+      color: var(--primary); line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .emp-sub {
+      font-size: 0.85rem; color: var(--text-light);
+      line-height: 1.6; margin-bottom: 24px;
+    }
+    .emp-specs {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .emp-spec-label {
+      font-size: 0.67rem; color: var(--text-light);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .emp-spec-value {
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--primary); margin-top: 3px;
+    }
+    .emp-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--secondary); letter-spacing: 0.5px;
+      transition: gap 0.2s;
+    }
+    .emp-link:hover { gap: 14px; }
+
+    /* ─── INVESTIDORES ─────────────────────────────────── */
+    #investidores {
+      background: var(--primary);
+      position: relative; overflow: hidden;
+    }
+    #investidores::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,150,90,0.15), transparent 70%);
+    }
+    .inv-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .inv-left .section-title { color: var(--white); }
+    .inv-left p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1rem; line-height: 1.85;
+      margin-bottom: 36px;
+    }
+    .inv-pillars {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      margin-bottom: 40px;
+    }
+    .inv-pillar {
+      border: 1px solid rgba(184,150,90,0.25);
+      padding: 24px 20px; border-radius: 2px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .inv-pillar:hover {
+      border-color: var(--secondary);
+      background: rgba(184,150,90,0.06);
+    }
+    .inv-pillar-icon {
+      font-size: 1.4rem; margin-bottom: 12px;
+    }
+    .inv-pillar-title {
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--secondary); letter-spacing: 0.5px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .inv-pillar-text {
+      font-size: 0.82rem; color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+    .inv-right {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(184,150,90,0.2);
+      border-radius: 4px;
+      padding: 48px 40px;
+    }
+    .inv-right h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .inv-right > p {
+      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+    }
+    .inv-form input, .inv-form select, .inv-form textarea {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 3px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+    .inv-form input:focus, .inv-form select:focus, .inv-form textarea:focus {
+      outline: none; border-color: var(--secondary);
+    }
+    .inv-form input::placeholder, .inv-form textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+    .inv-form select { color: rgba(255,255,255,0.6); }
+    .inv-form select option { background: var(--primary); color: var(--white); }
+    .inv-form button {
+      width: 100%; padding: 15px;
+      background: var(--secondary); color: var(--white);
+      border: none; border-radius: 3px;
+      font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.5px; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .inv-form button:hover { background: var(--accent); transform: translateY(-1px); }
+
+    /* ─── PORTAL ────────────────────────────────────────── */
+    #portal { background: var(--light); }
+    .portal-title-wrap { text-align: center; margin-bottom: 56px; }
+    .portal-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    }
+    .portal-card {
+      border-radius: 4px; overflow: hidden;
+      position: relative;
+      min-height: 400px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .portal-card:hover { transform: translateY(-4px); }
+    .portal-card-bg {
+      position: absolute; inset: 0;
+      object-fit: cover; width: 100%; height: 100%;
+    }
+    .portal-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,14,14,0.92) 0%, rgba(14,14,14,0.4) 50%, transparent 100%);
+    }
+    .portal-card-body {
+      position: relative; z-index: 2;
+      padding: 36px 36px 40px;
+    }
+    .portal-card-icon {
+      width: 48px; height: 48px;
+      background: var(--secondary);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .portal-card-label {
+      font-size: 0.7rem; color: var(--secondary);
+      text-transform: uppercase; letter-spacing: 2px;
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .portal-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--white); line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .portal-card-desc {
+      font-size: 0.85rem; color: rgba(255,255,255,0.65);
+      line-height: 1.65; margin-bottom: 28px;
+    }
+    .portal-features {
+      list-style: none; margin-bottom: 28px;
+    }
+    .portal-features li {
+      font-size: 0.82rem; color: rgba(255,255,255,0.72);
+      padding: 6px 0;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .portal-features li::before {
+      content: '✓';
+      color: var(--secondary); font-weight: 700; flex-shrink: 0;
+    }
+    .portal-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--secondary); color: var(--white);
+      padding: 13px 28px; border-radius: 3px;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.5px; transition: all 0.2s;
+      border: none; cursor: pointer;
+    }
+    .portal-btn:hover { background: var(--accent); }
+
+    /* ─── DIFERENCIAIS ─────────────────────────────────── */
+    #diferenciais { background: var(--white); }
+    .dif-title-wrap { text-align: center; margin-bottom: 64px; }
+    .dif-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    }
+    .dif-card {
+      padding: 40px 28px; border-radius: 2px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .dif-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--secondary);
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.3s;
+      z-index: 0;
+    }
+    .dif-card:hover { border-color: var(--secondary); }
+    .dif-card:hover::before { transform: scaleY(1); }
+    .dif-card:hover .dif-icon,
+    .dif-card:hover .dif-title,
+    .dif-card:hover .dif-text { color: var(--white); position: relative; z-index: 1; }
+    .dif-card:hover .dif-title { color: var(--white) !important; }
+    .dif-icon { font-size: 2.2rem; margin-bottom: 20px; position: relative; z-index: 1; }
+    .dif-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--primary); margin-bottom: 12px;
+      position: relative; z-index: 1; transition: color 0.3s;
+    }
+    .dif-text {
+      font-size: 0.85rem; color: var(--text-light);
+      line-height: 1.7; position: relative; z-index: 1; transition: color 0.3s;
+    }
+    .dif-card:hover .dif-text { color: rgba(255,255,255,0.85); }
+
+    /* ─── PROCESSO ──────────────────────────────────────── */
+    #processo { background: var(--light); }
+    .proc-title-wrap { text-align: center; margin-bottom: 64px; }
+    .proc-steps {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 0; position: relative;
+    }
+    .proc-steps::before {
+      content: '';
+      position: absolute; top: 28px; left: calc(10% + 20px); right: calc(10% + 20px);
+      height: 1px; background: var(--secondary); z-index: 0;
+    }
+    .proc-step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+    .proc-num {
+      width: 56px; height: 56px;
+      background: var(--secondary); color: var(--white);
+      border-radius: 50%; margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+    }
+    .proc-title {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--primary); margin-bottom: 8px;
+    }
+    .proc-text { font-size: 0.78rem; color: var(--text-light); line-height: 1.6; }
+
+    /* ─── CONTATO ───────────────────────────────────────── */
+    #contato { background: var(--white); }
+    .cont-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: start;
+    }
+    .cont-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--primary); margin-bottom: 16px;
+    }
+    .cont-info p {
+      font-size: 0.92rem; color: var(--text-light);
+      line-height: 1.8; margin-bottom: 36px;
+    }
+    .cont-items { display: flex; flex-direction: column; gap: 20px; }
+    .cont-item {
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .cont-item-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--light);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .cont-item-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--secondary);
+    }
+    .cont-item-value {
+      font-size: 0.9rem; color: var(--text);
+      margin-top: 2px; line-height: 1.5;
+    }
+    .cont-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .cont-form input, .cont-form select, .cont-form textarea {
+      width: 100%; padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s;
+    }
+    .cont-form input:focus, .cont-form select:focus, .cont-form textarea:focus {
+      outline: none; border-color: var(--secondary);
+    }
+    .cont-form textarea { resize: vertical; min-height: 130px; }
+    .cont-form button {
+      padding: 15px;
+      background: var(--primary); color: var(--white);
+      border: none; border-radius: 3px;
+      font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .cont-form button:hover { background: var(--secondary); transform: translateY(-1px); }
+
+    /* ─── FOOTER ────────────────────────────────────────── */
+    footer {
+      background: var(--primary);
+      padding: 64px 40px 32px;
+    }
+    .footer-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand { }
+    .footer-logo {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .footer-desc {
+      font-size: 0.85rem; color: rgba(255,255,255,0.45);
+      line-height: 1.75; margin-bottom: 24px;
+    }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social a {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.88rem; color: rgba(255,255,255,0.5);
+      transition: all 0.2s;
+    }
+    .footer-social a:hover { background: var(--secondary); color: var(--white); }
+    .footer-col h4 {
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--secondary); margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 0.85rem; color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--secondary); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy {
+      font-size: 0.78rem; color: rgba(255,255,255,0.3);
+    }
+    .footer-cnpj {
+      font-size: 0.75rem; color: rgba(255,255,255,0.2);
+    }
+
+    /* ─── WHATSAPP FLOAT ────────────────────────────────── */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 56px; height: 56px;
+      background: #25D366; color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+    }
+
+    /* ─── MODAL ─────────────────────────────────────────── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 4px;
+      width: 100%; max-width: 440px;
+      padding: 48px; position: relative;
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; font-size: 1.4rem;
+      cursor: pointer; color: var(--text-light);
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--primary); }
+    .modal-logo { margin-bottom: 28px; }
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .modal p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 28px; }
+    .modal-tabs {
+      display: flex; gap: 0;
+      border: 1px solid var(--border); border-radius: 3px;
+      margin-bottom: 24px; overflow: hidden;
+    }
+    .modal-tab {
+      flex: 1; padding: 10px;
+      background: none; border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+      color: var(--text-light);
+    }
+    .modal-tab.active { background: var(--primary); color: var(--white); }
+    .modal-form { display: flex; flex-direction: column; gap: 12px; }
+    .modal-form input {
+      width: 100%; padding: 13px 14px;
+      border: 1px solid var(--border); border-radius: 3px;
+      font-family: 'Inter', sans-serif; font-size: 0.88rem;
+      color: var(--text); transition: border-color 0.2s;
+    }
+    .modal-form input:focus { outline: none; border-color: var(--secondary); }
+    .modal-form button {
+      padding: 14px;
+      background: var(--primary); color: var(--white);
+      border: none; border-radius: 3px;
+      font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .modal-form button:hover { background: var(--secondary); }
+    .modal-footer {
+      margin-top: 16px; text-align: center;
+      font-size: 0.78rem; color: var(--text-light);
+    }
+    .modal-footer a { color: var(--secondary); }
+
+    /* ─── TOAST ─────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--primary); color: var(--white);
+      padding: 14px 24px; border-radius: 4px;
+      font-size: 0.85rem; box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+      transition: transform 0.3s; z-index: 3000;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      section { padding: 80px 28px; }
+      .nav-inner { padding: 18px 28px; }
+      .sobre-grid, .inv-grid, .cont-grid { grid-template-columns: 1fr; gap: 48px; }
+      .sobre-badge { bottom: 16px; right: 16px; }
+      .portal-grid { grid-template-columns: 1fr; }
+      .dif-grid { grid-template-columns: repeat(2, 1fr); }
+      .proc-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .proc-steps::before { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .hero-stats-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--primary);
+        padding: 20px;
+      }
+      .nav-links.open a { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .nav-burger { display: flex; }
+      .hero-title { font-size: 2.2rem; }
+      .hero-stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .emp-grid { grid-template-columns: 1fr; }
+      .inv-pillars { grid-template-columns: 1fr; }
+      .dif-grid { grid-template-columns: 1fr; }
+      .proc-steps { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo" style="gap:0">
+      <img src="assets/logos/scholl-branco.svg" alt="Scholl Empreendimentos" style="height:36px;width:auto;filter:brightness(0) invert(1);">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#empreendimentos">Empreendimentos</a></li>
+      <li><a href="#investidores">Investidores</a></li>
+      <li><a href="#processo">Processo</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="#" class="nav-cta" onclick="openPortal('cliente'); return false;">Área do Cliente</a></li>
+    </ul>
+    <div class="nav-burger" id="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Novo Hamburgo & Porto Alegre — RS</div>
+    <h1 class="hero-title">
+      Construímos <em>mais</em><br>do que imóveis
+    </h1>
+    <p class="hero-desc">
+      Incorporadora focada em alto padrão no Sul do Brasil. Transparência total,
+      rentabilidade real e empreendimentos que transformam o entorno.
+    </p>
+    <div class="hero-actions">
+      <a href="#empreendimentos" class="btn-primary">
+        Ver Empreendimentos →
+      </a>
+      <a href="#investidores" class="btn-outline">
+        Seja um Investidor
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stats-inner">
+      <div class="hero-stat">
+        <div class="hero-stat-value">R$ 8,6<span>M</span></div>
+        <div class="hero-stat-label">VGV em Lançamento</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">6<span>+</span></div>
+        <div class="hero-stat-label">Unidades no Portfólio</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">~20<span>%</span></div>
+        <div class="hero-stat-label">Margem de Lucro Estimada</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">2<span>+</span></div>
+        <div class="hero-stat-label">Cidades de Atuação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOBRE ─────────────────────────────────────────────────── -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-visual">
+        <img
+          class="sobre-img"
+          src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=80"
+          alt="Scholl Empreendimentos"
+          loading="lazy"
+        >
+        <div class="sobre-badge">
+          <span class="sobre-badge-number">2016</span>
+          <span class="sobre-badge-text">Fundada em</span>
+        </div>
+      </div>
+      <div class="sobre-text">
+        <div class="section-eyebrow">Quem somos</div>
+        <h2 class="section-title">A <em>Scholl</em> por trás<br>de cada projeto</h2>
+        <div class="divider"></div>
+        <p>
+          A Scholl Empreendimentos Imobiliários nasceu em Novo Hamburgo, RS, da visão de dois
+          irmãos — Filipe e Lucas Milbrath Scholl — com formação em engenharia civil e profundo
+          conhecimento do mercado imobiliário regional.
+        </p>
+        <p>
+          Combinamos rigor técnico e visão de negócio para entregar empreendimentos que superam
+          expectativas: para quem compra, para quem mora e para quem investe. Cada projeto é
+          conduzido com máxima transparência, estrutura jurídica sólida e gestão ativa do ciclo
+          completo de incorporação.
+        </p>
+        <div class="sobre-values">
+          <div class="sobre-value">
+            <div class="sobre-value-title">Transparência</div>
+            <div class="sobre-value-text">SPE por empreendimento, prestação de contas periódica e acesso digital ao andamento da obra.</div>
+          </div>
+          <div class="sobre-value">
+            <div class="sobre-value-title">Alto Padrão</div>
+            <div class="sobre-value-text">Localizações premium, arquitetura diferenciada e acabamentos selecionados em cada unidade.</div>
+          </div>
+          <div class="sobre-value">
+            <div class="sobre-value-title">Rentabilidade</div>
+            <div class="sobre-value-text">ROI superior à renda fixa, com incorporação a preço de custo para os investidores parceiros.</div>
+          </div>
+          <div class="sobre-value">
+            <div class="sobre-value-title">Expertise Técnica</div>
+            <div class="sobre-value-text">Sócios com formação em engenharia civil e CRECI, acompanhando obra e mercado de perto.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EMPREENDIMENTOS ───────────────────────────────────────── -->
+<section id="empreendimentos">
+  <div class="container">
+    <div class="emp-header">
+      <div>
+        <div class="section-eyebrow">Portfólio</div>
+        <h2 class="section-title">Nossos <em>Empreendimentos</em></h2>
+      </div>
+      <a href="#contato" class="btn-primary">Quero saber mais →</a>
+    </div>
+    <div class="emp-grid">
+
+      <!-- CLAVE -->
+      <div class="emp-card" onclick="window.location='clave.html'">
+        <div class="emp-img-wrap">
+          <img
+            class="emp-img"
+            src="https://drive.google.com/thumbnail?id=1ukxHhw9qZ6urwouUiDen8w5HpovyjOIM&sz=w800"
+            alt="CLAVE – Chácara das Pedras"
+            loading="lazy"
+            onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80'"
+          >
+          <span class="emp-badge badge-lancamento">Em Lançamento</span>
+        </div>
+        <div class="emp-body">
+          <div class="emp-city">Porto Alegre, RS</div>
+          <h3 class="emp-name">CLAVE</h3>
+          <p class="emp-sub">
+            Residencial de alto padrão no coração do bairro Chácara das Pedras, próximo ao
+            Parque Farroupilha e OSPA. Seis unidades exclusivas, a partir de 80 m².
+          </p>
+          <div class="emp-specs">
+            <div>
+              <div class="emp-spec-label">Unidades</div>
+              <div class="emp-spec-value">6</div>
+            </div>
+            <div>
+              <div class="emp-spec-label">Área privativa</div>
+              <div class="emp-spec-value">80–200 m²</div>
+            </div>
+            <div>
+              <div class="emp-spec-label">VGV</div>
+              <div class="emp-spec-value">R$ 8,6M</div>
+            </div>
+          </div>
+          <a href="clave.html" class="emp-link">
+            Conhecer o empreendimento →
+          </a>
+        </div>
+      </div>
+
+      <!-- POMMER I -->
+      <div class="emp-card">
+        <div class="emp-img-wrap">
+          <img
+            class="emp-img"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
+            alt="Condomínio Residencial Pommer I"
+            loading="lazy"
+          >
+          <span class="emp-badge badge-entregue">Entregue</span>
+        </div>
+        <div class="emp-body">
+          <div class="emp-city">Novo Hamburgo, RS</div>
+          <h3 class="emp-name">Condomínio Pommer I</h3>
+          <p class="emp-sub">
+            Condomínio residencial horizontal entregue em Novo Hamburgo. Projeto pioneiro da Scholl,
+            consolidando a metodologia de incorporação a preço de custo.
+          </p>
+          <div class="emp-specs">
+            <div>
+              <div class="emp-spec-label">Status</div>
+              <div class="emp-spec-value">Entregue</div>
+            </div>
+            <div>
+              <div class="emp-spec-label">Localização</div>
+              <div class="emp-spec-value">N. Hamburgo</div>
+            </div>
+            <div>
+              <div class="emp-spec-label">Padrão</div>
+              <div class="emp-spec-value">Médio Alto</div>
+            </div>
+          </div>
+          <a href="#contato" class="emp-link">
+            Solicitar informações →
+          </a>
+        </div>
+      </div>
+
+      <!-- PRÓXIMOS -->
+      <div class="emp-card" style="background: var(--light); box-shadow: none; border: 2px dashed var(--border);">
+        <div class="emp-img-wrap" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:3rem;color:rgba(184,150,90,0.3);">?</div>
+          <span class="emp-badge badge-breve">Em Captação</span>
+        </div>
+        <div class="emp-body">
+          <div class="emp-city">Novo Hamburgo / Porto Alegre</div>
+          <h3 class="emp-name">Próximo Lançamento</h3>
+          <p class="emp-sub">
+            Estamos sempre prospectando novas áreas com alto potencial de valorização.
+            Cadastre-se para ser o primeiro a conhecer as oportunidades do nosso pipeline.
+          </p>
+          <div class="emp-specs">
+            <div>
+              <div class="emp-spec-label">Status</div>
+              <div class="emp-spec-value">Estudo</div>
+            </div>
+            <div>
+              <div class="emp-spec-label">Padrão</div>
+              <div class="emp-spec-value">Alto</div>
+            </div>
+            <div>
+              <div class="emp-spec-label">Prazo</div>
+              <div class="emp-spec-value">Em breve</div>
+            </div>
+          </div>
+          <a href="#investidores" class="emp-link">Quero ser avisado →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIFERENCIAIS ──────────────────────────────────────────── -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="dif-title-wrap">
+      <div class="section-eyebrow">Por que escolher a Scholl</div>
+      <h2 class="section-title">Diferenciais que <em>fazem a diferença</em></h2>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card">
+        <div class="dif-icon">🏗️</div>
+        <h4 class="dif-title">Engenharia Própria</h4>
+        <p class="dif-text">Sócios com formação em engenharia civil pela Feevale, acompanhando cada etapa da obra e garantindo qualidade técnica.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">📊</div>
+        <h4 class="dif-title">SPE por Projeto</h4>
+        <p class="dif-text">Cada empreendimento possui sua própria SPE, garantindo separação patrimonial e rastreabilidade total dos recursos.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">📍</div>
+        <h4 class="dif-title">Localização Estratégica</h4>
+        <p class="dif-text">Bairros com alto índice de valorização, infraestrutura consolidada e forte demanda reprimida por imóveis de qualidade.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">🤝</div>
+        <h4 class="dif-title">Preço de Custo</h4>
+        <p class="dif-text">Investidores parceiros têm acesso à incorporação a preço de custo, maximizando o retorno sobre o capital investido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INVESTIDORES ──────────────────────────────────────────── -->
+<section id="investidores">
+  <div class="container">
+    <div class="inv-grid">
+      <div class="inv-left">
+        <div class="section-eyebrow" style="color:var(--secondary)">Para investidores</div>
+        <h2 class="section-title" style="color:var(--white)">Invista em <em>incorporação</em><br>de alto padrão</h2>
+        <div class="divider"></div>
+        <p>
+          O setor de incorporação imobiliária é um dos mais rentáveis do Brasil quando gerido com
+          transparência e técnica. Na Scholl, o investidor tem acesso direto ao empreendimento,
+          às planilhas de obra e à gestão financeira da SPE.
+        </p>
+        <div class="inv-pillars">
+          <div class="inv-pillar">
+            <div class="inv-pillar-icon">📈</div>
+            <div class="inv-pillar-title">Rentabilidade</div>
+            <div class="inv-pillar-text">TIR estimada superior à Selic, com retorno em prazo determinado.</div>
+          </div>
+          <div class="inv-pillar">
+            <div class="inv-pillar-icon">🔒</div>
+            <div class="inv-pillar-title">Segurança</div>
+            <div class="inv-pillar-text">Estrutura jurídica com Memorial de Incorporação, SPE e registro em RI.</div>
+          </div>
+          <div class="inv-pillar">
+            <div class="inv-pillar-icon">👁️</div>
+            <div class="inv-pillar-title">Transparência</div>
+            <div class="inv-pillar-text">Acesso ao portal do investidor com relatórios mensais de obra e financeiro.</div>
+          </div>
+          <div class="inv-pillar">
+            <div class="inv-pillar-icon">🏙️</div>
+            <div class="inv-pillar-title">Expansão</div>
+            <div class="inv-pillar-text">Pipeline crescente em NH e POA, com seleção criteriosa de cada novo terreno.</div>
+          </div>
+        </div>
+        <a href="#" class="btn-primary" onclick="openPortal('investidor'); return false;">
+          Acessar Portal do Investidor →
+        </a>
+      </div>
+      <div class="inv-right">
+        <h3>Quero ser Investidor</h3>
+        <p>Preencha o formulário e nosso time entrará em contato.</p>
+        <form class="inv-form" onsubmit="enviarLead(event, 'investidor')">
+          <input type="text"    placeholder="Nome completo *"         required>
+          <input type="email"   placeholder="E-mail *"                required>
+          <input type="tel"     placeholder="WhatsApp *"              required>
+          <select>
+            <option value="" disabled selected>Capacidade de investimento</option>
+            <option>Até R$ 100 mil</option>
+            <option>R$ 100 mil – R$ 300 mil</option>
+            <option>R$ 300 mil – R$ 500 mil</option>
+            <option>Acima de R$ 500 mil</option>
+          </select>
+          <select>
+            <option value="" disabled selected>Empreendimento de interesse</option>
+            <option>CLAVE – Porto Alegre</option>
+            <option>Próximo lançamento</option>
+            <option>Qualquer oportunidade</option>
+          </select>
+          <button type="submit">Quero ser contatado →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESSO ─────────────────────────────────────────────── -->
+<section id="processo">
+  <div class="container">
+    <div class="proc-title-wrap">
+      <div class="section-eyebrow">Como trabalhamos</div>
+      <h2 class="section-title">Do terreno à <em>entrega das chaves</em></h2>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <div class="proc-title">Estudo de Área</div>
+        <p class="proc-text">Análise de viabilidade técnica, jurídica e financeira antes de qualquer compromisso.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <div class="proc-title">Incorporação</div>
+        <p class="proc-text">Memorial de Incorporação, SPE, projetos aprovados e estrutura jurídica completa.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <div class="proc-title">Lançamento</div>
+        <p class="proc-text">Evento de lançamento com investidores, portal dedicado e campanha de vendas.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <div class="proc-title">Construção</div>
+        <p class="proc-text">Acompanhamento técnico semanal, relatórios fotográficos e updates no portal.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">05</div>
+        <div class="proc-title">Entrega</div>
+        <p class="proc-text">Vistoria, habite-se, assembléia de instalação do condomínio e entrega das chaves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PORTAL ───────────────────────────────────────────────── -->
+<section id="portal">
+  <div class="container">
+    <div class="portal-title-wrap">
+      <div class="section-eyebrow">Área Restrita</div>
+      <h2 class="section-title">Acesso ao <em>seu portal</em></h2>
+      <p style="color:var(--text-light);margin-top:12px;max-width:540px;margin-left:auto;margin-right:auto;font-size:0.95rem;line-height:1.7">
+        Clientes e investidores têm portais exclusivos com relatórios de obra, documentos, extrato financeiro e muito mais.
+      </p>
+    </div>
+    <div class="portal-grid">
+
+      <div class="portal-card">
+        <img
+          class="portal-card-bg"
+          src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80"
+          alt="Portal do Cliente"
+          loading="lazy"
+        >
+        <div class="portal-card-body">
+          <div class="portal-card-icon">🏠</div>
+          <div class="portal-card-label">Comprador</div>
+          <h3 class="portal-card-title">Portal do<br>Cliente</h3>
+          <p class="portal-card-desc">Acompanhe o andamento da obra, acesse documentos e gerencie seu investimento em tempo real.</p>
+          <ul class="portal-features">
+            <li>Acompanhamento fotográfico semanal da obra</li>
+            <li>Relatório de evolução e cronograma</li>
+            <li>Documentos e contratos digitais</li>
+            <li>Histórico financeiro e boletos</li>
+          </ul>
+          <button class="portal-btn" onclick="openPortal('cliente')">
+            Acessar Portal →
+          </button>
+        </div>
+      </div>
+
+      <div class="portal-card">
+        <img
+          class="portal-card-bg"
+          src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+          alt="Portal do Investidor"
+          loading="lazy"
+        >
+        <div class="portal-card-body">
+          <div class="portal-card-icon">📊</div>
+          <div class="portal-card-label">Investidor</div>
+          <h3 class="portal-card-title">Portal do<br>Investidor</h3>
+          <p class="portal-card-desc">Acesse os dados financeiros do empreendimento, dashboard de vendas e retorno projetado.</p>
+          <ul class="portal-features">
+            <li>Dashboard financeiro com DRE da SPE</li>
+            <li>Tabela de unidades e status de vendas</li>
+            <li>Documentos jurídicos da incorporação</li>
+            <li>Relatório de retorno e fluxo de caixa</li>
+          </ul>
+          <button class="portal-btn" onclick="openPortal('investidor')">
+            Acessar Portal →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTATO ──────────────────────────────────────────────── -->
+<section id="contato">
+  <div class="container">
+    <div class="cont-grid">
+      <div class="cont-info">
+        <div class="section-eyebrow">Fale conosco</div>
+        <h3>Vamos conversar<br>sobre seu próximo passo</h3>
+        <p>
+          Seja para comprar uma unidade no CLAVE, para se tornar investidor parceiro ou
+          para parcerias de terreno — estamos à disposição.
+        </p>
+        <div class="cont-items">
+          <div class="cont-item">
+            <div class="cont-item-icon">📍</div>
+            <div>
+              <div class="cont-item-label">Endereço</div>
+              <div class="cont-item-value">Av. Primeiro de Março, 219 — Sala 309<br>Novo Hamburgo, RS</div>
+            </div>
+          </div>
+          <div class="cont-item">
+            <div class="cont-item-icon">📱</div>
+            <div>
+              <div class="cont-item-label">WhatsApp</div>
+              <div class="cont-item-value">(51) 99898-9927</div>
+            </div>
+          </div>
+          <div class="cont-item">
+            <div class="cont-item-icon">✉️</div>
+            <div>
+              <div class="cont-item-label">E-mail</div>
+              <div class="cont-item-value">filipescholl@gmail.com</div>
+            </div>
+          </div>
+          <div class="cont-item">
+            <div class="cont-item-icon">🕐</div>
+            <div>
+              <div class="cont-item-label">Atendimento</div>
+              <div class="cont-item-value">Segunda a Sexta, 9h às 18h<br>Sábado, 9h às 13h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="cont-form" onsubmit="enviarLead(event, 'contato')">
+        <div class="form-row">
+          <input type="text"  placeholder="Nome *"        required>
+          <input type="tel"   placeholder="WhatsApp *"    required>
+        </div>
+        <input type="email"   placeholder="E-mail *"      required>
+        <select>
+          <option value="" disabled selected>Assunto</option>
+          <option>Comprar uma unidade — CLAVE</option>
+          <option>Ser investidor parceiro</option>
+          <option>Parceria de terreno</option>
+          <option>Outro</option>
+        </select>
+        <textarea placeholder="Mensagem (opcional)"></textarea>
+        <button type="submit">Enviar mensagem →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo" style="margin-bottom:20px">
+        <img src="assets/logos/scholl-branco.svg" alt="Scholl Empreendimentos" style="height:30px;width:auto;filter:brightness(0) invert(1);opacity:0.85">
+      </div>
+      <p class="footer-desc">
+        Incorporadora de alto padrão no Sul do Brasil. Comprometida com
+        transparência, qualidade construtiva e rentabilidade para nossos
+        investidores e compradores.
+      </p>
+      <div class="footer-social">
+        <a href="#" title="Instagram">📷</a>
+        <a href="#" title="LinkedIn">💼</a>
+        <a href="#" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#sobre">Quem Somos</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#processo">Como Trabalhamos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empreendimentos</h4>
+      <ul>
+        <li><a href="clave.html">CLAVE – Porto Alegre</a></li>
+        <li><a href="#empreendimentos">Pommer I – N. Hamburgo</a></li>
+        <li><a href="#empreendimentos">Em breve…</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Portais</h4>
+      <ul>
+        <li><a href="#" onclick="openPortal('cliente'); return false;">Portal do Cliente</a></li>
+        <li><a href="#" onclick="openPortal('investidor'); return false;">Portal do Investidor</a></li>
+        <li><a href="#investidores">Seja um Investidor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 Scholl Empreendimentos Imobiliários Ltda. Todos os direitos reservados.</span>
+    <span class="footer-cnpj">CNPJ: 15.826.352/0001-78 — CRE-CI 48108</span>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT ────────────────────────────────────────── -->
+<a href="https://wa.me/5551998989927" target="_blank" class="whatsapp-float" title="Falar no WhatsApp">
+  💬
+</a>
+
+<!-- ─── MODAL PORTAL ──────────────────────────────────────────── -->
+<div class="modal-overlay" id="portalModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePortal()">✕</button>
+    <div class="modal-logo">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="assets/logos/scholl-preto.svg" alt="Scholl" style="height:28px;width:auto;">
+        <div style="font-size:0.65rem;color:var(--secondary);letter-spacing:2px;text-transform:uppercase;margin-left:4px;">Área Restrita</div>
+      </div>
+    </div>
+    <h2>Bem-vindo de volta</h2>
+    <p>Acesse sua conta para acompanhar seu empreendimento.</p>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tabCliente"    onclick="switchTab('cliente')">Sou Cliente</button>
+      <button class="modal-tab"        id="tabInvestidor" onclick="switchTab('investidor')">Sou Investidor</button>
+    </div>
+    <form class="modal-form" onsubmit="fazerLogin(event)">
+      <input type="email"    placeholder="E-mail ou CPF" required id="loginEmail">
+      <input type="password" placeholder="Senha"         required id="loginSenha">
+      <button type="submit" id="loginBtn">Entrar →</button>
+    </form>
+    <div class="modal-footer">
+      <a href="#" onclick="recuperarSenha(); return false;">Esqueci minha senha</a> ·
+      Dúvidas? <a href="https://wa.me/5551998989927" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TOAST ─────────────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // NAV SCROLL
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // BURGER MENU
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // PORTAL MODAL
+  let portalTipo = 'cliente';
+  function openPortal(tipo) {
+    portalTipo = tipo || 'cliente';
+    switchTab(portalTipo);
+    document.getElementById('portalModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePortal() {
+    document.getElementById('portalModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('portalModal').addEventListener('click', function(e) {
+    if (e.target === this) closePortal();
+  });
+  function switchTab(tipo) {
+    portalTipo = tipo;
+    document.getElementById('tabCliente').classList.toggle('active', tipo === 'cliente');
+    document.getElementById('tabInvestidor').classList.toggle('active', tipo === 'investidor');
+    document.getElementById('loginBtn').textContent = tipo === 'cliente' ? 'Acessar Portal do Cliente →' : 'Acessar Portal do Investidor →';
+  }
+
+  // LOGIN
+  function fazerLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    btn.textContent = 'Entrando…';
+    btn.disabled = true;
+    setTimeout(() => {
+      closePortal();
+      const dest = portalTipo === 'investidor' ? 'portal-investidor.html' : 'portal-cliente.html';
+      window.location.href = dest;
+    }, 1200);
+  }
+
+  function recuperarSenha() {
+    showToast('📧 Link de recuperação enviado para seu e-mail!');
+  }
+
+  // LEAD FORMS
+  function enviarLead(e, origem) {
+    e.preventDefault();
+    showToast('✅ Mensagem enviada! Retornaremos em breve via WhatsApp.');
+    e.target.reset();
+  }
+
+  // TOAST
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // COUNTER ANIMATION
+  function animateCounters() {
+    document.querySelectorAll('.hero-stat-value').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(10px)';
+      el.style.transition = 'all 0.6s ease';
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 300 + Math.random() * 400);
+    });
+  }
+  window.addEventListener('load', animateCounters);
+</script>
+</body>
+</html>

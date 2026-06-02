@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLAVE | Scholl Empreendimentos — Chácara das Pedras, Porto Alegre</title>
+  <meta name="description" content="CLAVE — Residencial de alto padrão no bairro Chácara das Pedras, Porto Alegre. 6 unidades exclusivas de 80 a 200 m². VGV R$ 8,6M.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:   #312E2C;
+      --secondary: #DCFDA4;
+      --accent:    #c8f07a;
+      --light:     #F5F2ED;
+      --white:     #FFFFFF;
+      --text:      #2D2D2D;
+      --text-light:#767676;
+      --border:    #E0DAD0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--primary);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 40px;
+    }
+    .logo { display: flex; align-items: center; gap: 14px; }
+    .logo-mark {
+      width: 40px; height: 40px; background: var(--secondary);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem;
+      color: var(--white);
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 600; color: var(--white); }
+    .logo-sub { font-size: 0.6rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
+    .nav-project {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--secondary);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--secondary); }
+    .nav-cta {
+      background: var(--secondary) !important; color: var(--white) !important;
+      padding: 9px 20px; border-radius: 3px; font-weight: 600 !important;
+    }
+    .nav-back { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+    .nav-back:hover { color: var(--secondary); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      background: url('https://drive.google.com/thumbnail?id=1FlbOopOIHw8E9-NttMjxnxHKFhXdzrcY&sz=w1920') center/cover no-repeat, url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=80') center/cover no-repeat;
+      position: relative;
+      display: flex; align-items: flex-end;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,15,20,0.95) 0%, rgba(13,15,20,0.5) 50%, rgba(13,15,20,0.2) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 40px 80px; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--secondary); color: var(--white);
+      padding: 5px 16px; border-radius: 2px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem; color: rgba(255,255,255,0.55);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700; line-height: 0.95;
+      color: var(--white); letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.6); font-weight: 300;
+      max-width: 500px; line-height: 1.75; margin-bottom: 44px;
+    }
+    .hero-pills {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .hero-pill {
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8);
+      padding: 8px 18px; border-radius: 40px;
+      font-size: 0.8rem;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--secondary); color: var(--primary);
+      padding: 16px 36px; border-radius: 3px;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px;
+      transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-gold:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8);
+      padding: 16px 36px; border-radius: 3px;
+      font-size: 0.85rem; font-weight: 500;
+      transition: all 0.25s;
+    }
+    .btn-ghost:hover { border-color: var(--secondary); color: var(--secondary); }
+    .hero-scroll {
+      position: absolute; bottom: 32px; right: 40px; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.3); font-size: 0.68rem; letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 50px; background: rgba(255,255,255,0.2);
+      animation: scrollLine 2s ease infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(1); transform-origin: top; }
+      50%  { transform: scaleY(0.3); transform-origin: bottom; }
+      100% { transform: scaleY(1); transform-origin: top; }
+    }
+
+    /* SECTIONS */
+    section { padding: 100px 40px; }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--secondary); margin-bottom: 16px;
+    }
+    .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--secondary); }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700; line-height: 1.2; color: var(--primary);
+    }
+    .section-title em { color: var(--secondary); font-style: normal; }
+    .divider { width: 48px; height: 3px; background: var(--secondary); margin: 18px 0 32px; }
+
+    /* SOBRE O EMPREENDIMENTO */
+    #sobre { background: var(--light); }
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .sobre-text p { font-size: 0.97rem; color: var(--text-light); line-height: 1.85; margin-bottom: 20px; }
+    .specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .spec-card {
+      background: var(--white); padding: 24px 20px; border-radius: 2px;
+      border-top: 3px solid var(--secondary); text-align: center;
+    }
+    .spec-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 700; color: var(--secondary); line-height: 1;
+    }
+    .spec-label { font-size: 0.72rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+    .sobre-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .sobre-imgs img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 2px; }
+    .sobre-imgs .img-tall { aspect-ratio: 2/3; grid-row: span 2; }
+
+    /* LOCALIZAÇÃO */
+    #localizacao { background: var(--white); }
+    .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .loc-map {
+      width: 100%; aspect-ratio: 4/3; border-radius: 2px; overflow: hidden;
+      background: var(--light);
+      border: 1px solid var(--border);
+    }
+    .loc-map iframe { width: 100%; height: 100%; border: none; }
+    .loc-features { display: flex; flex-direction: column; gap: 16px; }
+    .loc-feature {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px; border-radius: 2px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .loc-feature:hover { border-color: var(--secondary); }
+    .loc-feature-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--light); border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .loc-feature-title { font-size: 0.85rem; font-weight: 700; color: var(--primary); }
+    .loc-feature-text { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+
+    /* UNIDADES */
+    #unidades { background: var(--primary); }
+    #unidades .section-title { color: var(--white); }
+    .unidades-header { margin-bottom: 56px; }
+    .unidades-header p { color: rgba(255,255,255,0.5); margin-top: 12px; font-size: 0.95rem; }
+    .unidades-table {
+      width: 100%; border-collapse: separate; border-spacing: 0 12px;
+    }
+    .unidades-table thead tr th {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--secondary);
+      padding: 0 20px 8px; text-align: left;
+      border-bottom: 1px solid rgba(184,150,90,0.25);
+    }
+    .unidades-table tbody tr {
+      background: rgba(255,255,255,0.04);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .unidades-table tbody tr:hover { background: rgba(184,150,90,0.08); }
+    .unidades-table tbody tr.permutada { opacity: 0.4; cursor: default; }
+    .unidades-table tbody tr td {
+      padding: 20px 20px; color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+    }
+    .unidades-table tbody tr td:first-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700;
+      border-left: 3px solid var(--secondary);
+      border-radius: 2px 0 0 2px;
+    }
+    .unidades-table tbody tr.permutada td:first-child { border-left-color: rgba(255,255,255,0.2); }
+    .status-pill {
+      display: inline-block; padding: 4px 12px; border-radius: 40px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .status-disponivel { background: rgba(16,185,129,0.15); color: #10B981; }
+    .status-permutada  { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.3); }
+    .status-reservada  { background: rgba(245,158,11,0.15); color: #F59E0B; }
+    .unidades-total {
+      margin-top: 28px; padding: 24px; background: rgba(184,150,90,0.1);
+      border: 1px solid rgba(184,150,90,0.2); border-radius: 2px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .unidades-total-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+    .unidades-total-value { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--secondary); }
+    .unidades-note { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-top: 16px; }
+
+    /* DIFERENCIAIS */
+    #diferenciais { background: var(--light); }
+    .dif-title-wrap { text-align: center; margin-bottom: 56px; }
+    .dif-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .dif-card {
+      background: var(--white); padding: 36px 28px;
+      border-radius: 2px; border-bottom: 3px solid transparent;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .dif-card:hover { border-bottom-color: var(--secondary); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .dif-icon { font-size: 2rem; margin-bottom: 16px; }
+    .dif-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+    .dif-text { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; }
+
+    /* CTA FINAL */
+    #cta {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a1520 100%);
+      text-align: center; padding: 100px 40px;
+      position: relative; overflow: hidden;
+    }
+    #cta::before {
+      content: 'CLAVE';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 20vw, 18rem);
+      font-weight: 700; color: rgba(184,150,90,0.05);
+      white-space: nowrap; pointer-events: none; user-select: none;
+      letter-spacing: 20px;
+    }
+    #cta .container { position: relative; z-index: 1; }
+    #cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700;
+      color: var(--white); margin-bottom: 16px;
+    }
+    #cta h2 em { color: var(--secondary); font-style: normal; }
+    #cta p {
+      color: rgba(255,255,255,0.55); max-width: 520px;
+      margin: 0 auto 40px; font-size: 1rem; line-height: 1.75;
+    }
+    .cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    /* INTERESSE FORM */
+    #interesse { background: var(--white); }
+    .int-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .int-info h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+    .int-info p { font-size: 0.95rem; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+    .int-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .int-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; }
+    .int-form { display: flex; flex-direction: column; gap: 14px; }
+    .int-form input, .int-form select, .int-form textarea {
+      width: 100%; padding: 14px 16px;
+      border: 1px solid var(--border); border-radius: 3px;
+      font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .int-form input:focus, .int-form select:focus, .int-form textarea:focus {
+      outline: none; border-color: var(--secondary);
+    }
+    .int-form textarea { min-height: 110px; resize: vertical; }
+    .int-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .int-form button {
+      padding: 15px;
+      background: var(--primary); color: var(--white);
+      border: none; border-radius: 3px;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .int-form button:hover { background: var(--secondary); }
+    .int-form .privacy { font-size: 0.75rem; color: var(--text-light); text-align: center; }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      padding: 40px;
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+    .footer-back { font-size: 0.82rem; color: var(--secondary); font-weight: 600; }
+    .footer-back:hover { color: var(--accent); }
+
+    /* FLOAT */
+    .float-interesse {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: var(--secondary); color: var(--white);
+      padding: 14px 24px; border-radius: 40px;
+      font-size: 0.82rem; font-weight: 700;
+      box-shadow: 0 6px 24px rgba(184,150,90,0.45);
+      transition: all 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .float-interesse:hover { background: var(--accent); transform: translateY(-2px); }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 88px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--primary); color: var(--white);
+      padding: 14px 24px; border-radius: 4px;
+      font-size: 0.85rem; box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+      transition: transform 0.3s; z-index: 3000;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 1024px) {
+      section { padding: 80px 28px; }
+      .nav-inner { padding: 14px 28px; }
+      .nav-project { display: none; }
+      .sobre-grid, .loc-grid, .int-grid { grid-template-columns: 1fr; gap: 48px; }
+      .dif-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-title { font-size: 2.8rem; }
+      .dif-grid { grid-template-columns: 1fr; }
+      .unidades-table { font-size: 0.82rem; }
+      .sobre-imgs { grid-template-columns: 1fr; }
+      .int-gallery { grid-template-columns: 1fr; }
+      .int-form .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo" style="gap:0">
+      <img src="assets/logos/scholl-branco.svg" alt="Scholl Empreendimentos" style="height:28px;width:auto;filter:brightness(0) invert(1);opacity:0.85;">
+    </a>
+    <div class="nav-project">
+      <img src="assets/logos/clave-branco.svg" alt="CLAVE" style="height:22px;width:auto;filter:brightness(0) invert(1);opacity:0.9">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#sobre">O Empreendimento</a></li>
+      <li><a href="#localizacao">Localização</a></li>
+      <li><a href="#unidades">Unidades</a></li>
+      <li><a href="#interesse" class="nav-cta">Tenho Interesse</a></li>
+    </ul>
+    <a href="index.html" class="nav-back">← Scholl Empreendimentos</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">✦ Em Lançamento</div>
+    <div class="hero-eyebrow">Chácara das Pedras · Porto Alegre, RS</div>
+    <h1 class="hero-title">Clave</h1>
+    <p class="hero-sub">
+      Seis unidades residenciais de alto padrão em uma das endereças mais valorizadas
+      de Porto Alegre. Elegância, privacidade e proximidade com o melhor da cidade.
+    </p>
+    <div class="hero-pills">
+      <span class="hero-pill">📍 Av. Prudente de Moraes, 209</span>
+      <span class="hero-pill">🏗️ 6 Unidades Exclusivas</span>
+      <span class="hero-pill">📐 80 a 200 m²</span>
+      <span class="hero-pill">🚗 2 Vagas por Unidade</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#interesse" class="btn-gold">Quero saber mais →</a>
+      <a href="#unidades"  class="btn-ghost">Ver Unidades</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- SOBRE O EMPREENDIMENTO -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <div class="section-eyebrow">O Empreendimento</div>
+        <h2 class="section-title">Onde <em>design</em> e<br>localização se encontram</h2>
+        <div class="divider"></div>
+        <p>
+          O CLAVE é um residencial multifamiliar de alto padrão desenvolvido pela Scholl Empreendimentos
+          na Avenida Prudente de Moraes, 209, no bairro Chácara das Pedras — um dos endereços mais
+          cobiçados de Porto Alegre, reconhecido pela tranquilidade, arborização e proximidade
+          com o melhor da cidade.
+        </p>
+        <p>
+          Com apenas seis unidades, o CLAVE foi concebido para oferecer exclusividade real: plantas
+          generosas e inteligentes, fachada contemporânea assinada por arquitetos de referência e
+          o padrão construtivo que é marca registrada da Scholl.
+        </p>
+        <p>
+          A incorporação é realizada a preço de custo para os investidores parceiros, com gestão
+          100% transparente via SPE e acesso digital a todos os documentos e relatórios de obra.
+        </p>
+        <div class="specs-grid">
+          <div class="spec-card">
+            <div class="spec-value">6</div>
+            <div class="spec-label">Unidades</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-value">200 m²</div>
+            <div class="spec-label">Maior unidade</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-value">R$ 8,6M</div>
+            <div class="spec-label">VGV Total</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-value">~20%</div>
+            <div class="spec-label">Margem estimada</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-value">2</div>
+            <div class="spec-label">Vagas/Unidade</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-value">5+</div>
+            <div class="spec-label">Pavimentos</div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-imgs">
+        <img class="img-tall"
+          src="https://drive.google.com/thumbnail?id=1ukxHhw9qZ6urwouUiDen8w5HpovyjOIM&sz=w800"
+          alt="CLAVE Fachada Diurna"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=600&q=80'">
+        <img
+          src="https://drive.google.com/thumbnail?id=1nKB3O2TFuGPOK1Wpo5K2bE34UbDF_6tw&sz=w600"
+          alt="CLAVE Garden"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&q=80'">
+        <img
+          src="https://drive.google.com/thumbnail?id=1JCOfQgzCvJyDP3O37G0duFYjiWJuk-yJ&sz=w600"
+          alt="CLAVE Salão de Festas"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=400&q=80'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section id="localizacao">
+  <div class="container">
+    <div class="section-eyebrow">Localização</div>
+    <h2 class="section-title" style="margin-bottom:16px">O melhor <em>endereço</em><br>de Porto Alegre</h2>
+    <div class="divider"></div>
+    <div class="loc-grid">
+      <div>
+        <div class="loc-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.527!2d-51.18769!3d-30.02555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197888c98b8e9d%3A0x1!2sAv.+Prudente+de+Moraes%2C+209+-+Ch%C3%A1cara+das+Pedras%2C+Porto+Alegre!5e0!3m2!1spt!2sbr!4v1"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="margin-top:16px;padding:16px;background:var(--light);border-radius:2px;">
+          <div style="font-size:0.78rem;color:var(--secondary);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Endereço</div>
+          <div style="font-size:0.92rem;color:var(--text);">Av. Prudente de Moraes, 209 — Chácara das Pedras, Porto Alegre, RS</div>
+        </div>
+      </div>
+      <div class="loc-features">
+        <div style="margin-bottom:8px;">
+          <div style="font-size:0.88rem;color:var(--text-light);line-height:1.7;margin-bottom:24px;">
+            O bairro Chácara das Pedras é um dos mais tradicionais e valorizados de Porto Alegre,
+            rodeado por escolas de excelência, comércio sofisticado e fácil acesso às principais
+            vias da cidade.
+          </div>
+        </div>
+        <div class="loc-feature">
+          <div class="loc-feature-icon">🏫</div>
+          <div>
+            <div class="loc-feature-title">Excelentes Escolas nas Proximidades</div>
+            <div class="loc-feature-text">Red Balloon, Colégio Santa Catarina e outras escolas de referência a poucos minutos</div>
+          </div>
+        </div>
+        <div class="loc-feature">
+          <div class="loc-feature-icon">🛍️</div>
+          <div>
+            <div class="loc-feature-title">Shopping Iguatemi a 10 min</div>
+            <div class="loc-feature-text">Acesso rápido ao principal shopping de Porto Alegre e ao bairro Moinhos de Vento</div>
+          </div>
+        </div>
+        <div class="loc-feature">
+          <div class="loc-feature-icon">🎭</div>
+          <div>
+            <div class="loc-feature-title">Cultura e Entretenimento</div>
+            <div class="loc-feature-text">OSPA (Orquestra Sinfônica de Porto Alegre) e Parque Farroupilha a poucos quarteirões</div>
+          </div>
+        </div>
+        <div class="loc-feature">
+          <div class="loc-feature-icon">🌳</div>
+          <div>
+            <div class="loc-feature-title">Bairro Arborizado e Tranquilo</div>
+            <div class="loc-feature-text">Ruas arborizadas, perfil residencial e excelente segurança — qualidade de vida real</div>
+          </div>
+        </div>
+        <div class="loc-feature">
+          <div class="loc-feature-icon">📈</div>
+          <div>
+            <div class="loc-feature-title">Alta Valorização Histórica</div>
+            <div class="loc-feature-text">Um dos bairros com maior valorização imobiliária de POA na última década</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIDADES -->
+<section id="unidades">
+  <div class="container">
+    <div class="unidades-header">
+      <div class="section-eyebrow">Tabela de Unidades</div>
+      <h2 class="section-title">Escolha sua <em>unidade</em></h2>
+      <p>Preços conforme tabela vigente. Consulte-nos sobre condições especiais para investidores.</p>
+    </div>
+    <table class="unidades-table">
+      <thead>
+        <tr>
+          <th>Unidade</th>
+          <th>Tipo</th>
+          <th>Área Privativa</th>
+          <th>Vagas</th>
+          <th>Preço de Tabela</th>
+          <th>Preço / m²</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="selecionarUnidade('201')">
+          <td>201</td>
+          <td>Residencial</td>
+          <td>155,85 m²</td>
+          <td>2</td>
+          <td>R$ 1.240.344</td>
+          <td>R$ 7.959/m²</td>
+          <td><span class="status-pill status-disponivel">Disponível</span></td>
+          <td><a href="#interesse" class="btn-gold" style="padding:8px 16px;font-size:0.75rem;">Tenho interesse</a></td>
+        </tr>
+        <tr onclick="selecionarUnidade('201-D')">
+          <td>201-D</td>
+          <td>Duplex</td>
+          <td>200,49 m²</td>
+          <td>2</td>
+          <td>R$ 1.776.024</td>
+          <td>R$ 8.858/m²</td>
+          <td><span class="status-pill status-disponivel">Disponível</span></td>
+          <td><a href="#interesse" class="btn-gold" style="padding:8px 16px;font-size:0.75rem;">Tenho interesse</a></td>
+        </tr>
+        <tr onclick="selecionarUnidade('301-D')">
+          <td>301-D</td>
+          <td>Duplex</td>
+          <td>125,49 m²</td>
+          <td>2</td>
+          <td>R$ 1.505.880</td>
+          <td>R$ 12.000/m²</td>
+          <td><span class="status-pill status-disponivel">Disponível</span></td>
+          <td><a href="#interesse" class="btn-gold" style="padding:8px 16px;font-size:0.75rem;">Tenho interesse</a></td>
+        </tr>
+        <tr class="permutada">
+          <td>401</td>
+          <td>Residencial</td>
+          <td>80,85 m²</td>
+          <td>2</td>
+          <td>R$ 970.200</td>
+          <td>R$ 12.000/m²</td>
+          <td><span class="status-pill status-permutada">Permutada</span></td>
+          <td></td>
+        </tr>
+        <tr onclick="selecionarUnidade('501-D')">
+          <td>501-D</td>
+          <td>Duplex</td>
+          <td>129,61 m²</td>
+          <td>2</td>
+          <td>R$ 1.555.320</td>
+          <td>R$ 12.000/m²</td>
+          <td><span class="status-pill status-disponivel">Disponível</span></td>
+          <td><a href="#interesse" class="btn-gold" style="padding:8px 16px;font-size:0.75rem;">Tenho interesse</a></td>
+        </tr>
+        <tr onclick="selecionarUnidade('502-D')">
+          <td>502-D</td>
+          <td>Duplex</td>
+          <td>133,18 m²</td>
+          <td>2</td>
+          <td>R$ 1.598.160</td>
+          <td>R$ 12.000/m²</td>
+          <td><span class="status-pill status-disponivel">Disponível</span></td>
+          <td><a href="#interesse" class="btn-gold" style="padding:8px 16px;font-size:0.75rem;">Tenho interesse</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="unidades-total">
+      <div>
+        <div class="unidades-total-label">VGV Total do Empreendimento</div>
+        <div class="unidades-total-value">R$ 8.645.928</div>
+      </div>
+      <div style="text-align:right">
+        <div class="unidades-total-label">Unidades Disponíveis</div>
+        <div class="unidades-total-value" style="font-size:1.2rem;">5 de 6</div>
+      </div>
+      <a href="#interesse" class="btn-gold">Consultar condições especiais →</a>
+    </div>
+    <div class="unidades-note">* Preços sujeitos a alteração conforme velocidade de vendas. Consulte disponibilidade atualizada com nossa equipe.</div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS DO PROJETO -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="dif-title-wrap">
+      <div class="section-eyebrow">Diferenciais do Projeto</div>
+      <h2 class="section-title">O que torna o <em>CLAVE</em> único</h2>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card">
+        <div class="dif-icon">🏛️</div>
+        <h4 class="dif-title">Arquitetura Contemporânea</h4>
+        <p class="dif-text">Projeto arquitetônico assinado com fachada diferenciada, uso de vidro, concreto aparente e materiais nobres, criando identidade única no bairro.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">🔑</div>
+        <h4 class="dif-title">Exclusividade Máxima</h4>
+        <p class="dif-text">Apenas 6 unidades. Sem corredores movimentados, sem vizinhos excessivos. Cada morador terá a experiência de viver num edifício verdadeiramente exclusivo.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">📐</div>
+        <h4 class="dif-title">Plantas Inteligentes</h4>
+        <p class="dif-text">Unidades de 80 a 200 m² com plantas que aproveitam cada metro quadrado, integração de ambientes e varandas com vista aberta para o bairro.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">🌱</div>
+        <h4 class="dif-title">Sustentabilidade</h4>
+        <p class="dif-text">Materiais autolimpantes, sistemas de reaproveitamento de água e iluminação eficiente — reduzindo custos de condomínio e impacto ambiental.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">🔐</div>
+        <h4 class="dif-title">Segurança Completa</h4>
+        <p class="dif-text">Portaria controlada, câmeras de segurança, fechadura eletrônica nas unidades e controle de acesso para veículos.</p>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">📱</div>
+        <h4 class="dif-title">Automação Residencial</h4>
+        <p class="dif-text">Infraestrutura para automação residencial (smart home), pontos de recarga para veículos elétricos e conectividade de alta velocidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta">
+  <div class="container">
+    <h2>Faltam apenas <em>5 unidades</em><br>disponíveis no CLAVE</h2>
+    <p>
+      Reserve sua visita ou solicite o material completo de apresentação.
+      Nossa equipe está à disposição para apresentar o projeto pessoalmente.
+    </p>
+    <div class="cta-btns">
+      <a href="#interesse" class="btn-gold">Quero reservar uma visita →</a>
+      <a href="https://wa.me/5551998989927" target="_blank" class="btn-ghost" style="border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);">
+        💬 WhatsApp Direto
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO DE INTERESSE -->
+<section id="interesse">
+  <div class="container">
+    <div class="int-grid">
+      <div class="int-info">
+        <div class="section-eyebrow">Demonstre Interesse</div>
+        <h3>Dê o primeiro<br>passo para o CLAVE</h3>
+        <p>
+          Preencha o formulário ao lado e nosso corretor especializado entrará em contato
+          em até 1 hora útil para apresentar o projeto completo, condições de pagamento
+          e tirar todas as suas dúvidas.
+        </p>
+        <div class="int-gallery">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&q=80" alt="Interior CLAVE" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=80" alt="Interior CLAVE" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80" alt="Interior CLAVE" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80" alt="Interior CLAVE" loading="lazy">
+        </div>
+      </div>
+      <form class="int-form" onsubmit="enviarInteresse(event)">
+        <div class="row">
+          <input type="text"  placeholder="Nome completo *" required id="nomeInt">
+          <input type="tel"   placeholder="WhatsApp *"      required id="telInt">
+        </div>
+        <input type="email" placeholder="E-mail *" required id="emailInt">
+        <select id="unidadeInt">
+          <option value="" disabled selected>Unidade de interesse</option>
+          <option>Unidade 201 — 155,85 m² — R$ 1.240.344</option>
+          <option>Unidade 201-D (Duplex) — 200,49 m² — R$ 1.776.024</option>
+          <option>Unidade 301-D (Duplex) — 125,49 m² — R$ 1.505.880</option>
+          <option>Unidade 501-D (Duplex) — 129,61 m² — R$ 1.555.320</option>
+          <option>Unidade 502-D (Duplex) — 133,18 m² — R$ 1.598.160</option>
+          <option>Ainda estou decidindo</option>
+          <option>Tenho interesse como investidor</option>
+        </select>
+        <select>
+          <option value="" disabled selected>Como conheceu o CLAVE?</option>
+          <option>Indicação pessoal</option>
+          <option>Redes sociais</option>
+          <option>Site Scholl Empreendimentos</option>
+          <option>Evento de lançamento</option>
+          <option>Outro</option>
+        </select>
+        <textarea placeholder="Mensagem ou dúvidas (opcional)"></textarea>
+        <button type="submit">Quero ser contatado sobre o CLAVE →</button>
+        <div class="privacy">🔒 Seus dados são protegidos. Não compartilharemos com terceiros.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo" style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+        <div class="logo-mark" style="width:36px;height:36px;font-size:1rem;">S</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:600;color:white;">Scholl Empreendimentos</div>
+          <div style="font-size:0.6rem;color:var(--secondary);letter-spacing:2px;text-transform:uppercase;">CLAVE — Porto Alegre</div>
+        </div>
+      </div>
+      <div class="footer-copy">© 2024 Scholl Empreendimentos Imobiliários Ltda · CNPJ 15.826.352/0001-78</div>
+    </div>
+    <a href="index.html" class="footer-back">← Voltar ao site institucional</a>
+  </div>
+</footer>
+
+<!-- FLOAT BTN -->
+<a href="#interesse" class="float-interesse">✦ Tenho interesse no CLAVE</a>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  let unidadeSelecionada = '';
+
+  function selecionarUnidade(codigo) {
+    unidadeSelecionada = codigo;
+    const sel = document.getElementById('unidadeInt');
+    for (let i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text.includes(codigo)) {
+        sel.selectedIndex = i; break;
+      }
+    }
+    document.getElementById('interesse').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('nomeInt').focus();
+  }
+
+  function enviarInteresse(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✅ Enviado com sucesso!';
+      showToast('🎉 Recebemos seu interesse! Nossa equipe entrará em contato em breve.');
+      setTimeout(() => {
+        btn.textContent = 'Quero ser contatado sobre o CLAVE →';
+        btn.disabled = false;
+        e.target.reset();
+      }, 3000);
+    }, 1200);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
+
+  // Hide float btn when in interesse section
+  const floatBtn = document.querySelector('.float-interesse');
+  const interesseSection = document.getElementById('interesse');
+  window.addEventListener('scroll', () => {
+    const rect = interesseSection.getBoundingClientRect();
+    floatBtn.style.opacity = (rect.top < window.innerHeight && rect.bottom > 0) ? '0' : '1';
+  });
+</script>
+</body>
+</html>

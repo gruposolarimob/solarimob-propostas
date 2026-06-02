@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Investidor | Scholl Empreendimentos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:   #0D0F14;
+      --secondary: #DCFDA4;
+      --accent:    #c8f07a;
+      --light:     #F5F2ED;
+      --white:     #FFFFFF;
+      --text:      #E8E4DD;
+      --text-light:#9A9590;
+      --border:    #2A2825;
+      --success:   #10B981;
+      --warning:   #F59E0B;
+      --danger:    #EF4444;
+      --info:      #3B82F6;
+      --sidebar-w: 260px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0D0F14; color: var(--text); min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    /* LAYOUT */
+    .layout { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-w); flex-shrink: 0;
+      background: #080A0F;
+      position: fixed; top: 0; left: 0; bottom: 0;
+      display: flex; flex-direction: column;
+      z-index: 200;
+      border-right: 1px solid rgba(184,150,90,0.1);
+    }
+    .sidebar-header { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .sidebar-logo { display: flex; align-items: center; gap: 12px; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--secondary);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; color: var(--white);
+    }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 600; color: var(--white); }
+    .logo-sub { font-size: 0.6rem; color: var(--secondary); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+    .sidebar-user {
+      padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .user-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(184,150,90,0.12); border: 1px solid rgba(184,150,90,0.25);
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.65rem; color: var(--secondary); font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .user-name { font-size: 0.9rem; font-weight: 600; color: var(--white); }
+    .user-quota { font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+    .sidebar-nav { flex: 1; padding: 16px 0; overflow-y: auto; }
+    .nav-section { font-size: 0.62rem; font-weight: 700; color: rgba(255,255,255,0.15); letter-spacing: 2px; text-transform: uppercase; padding: 10px 24px 4px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 24px;
+      font-size: 0.84rem; color: rgba(255,255,255,0.45);
+      cursor: pointer; transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.03); }
+    .nav-item.active { color: var(--secondary); background: rgba(184,150,90,0.07); border-left-color: var(--secondary); }
+    .nav-item-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-footer { padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .sidebar-footer a { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: rgba(255,255,255,0.25); transition: color 0.2s; }
+    .sidebar-footer a:hover { color: rgba(255,255,255,0.6); }
+
+    /* MAIN */
+    .main { margin-left: var(--sidebar-w); flex: 1; background: #0D0F14; min-height: 100vh; }
+
+    /* TOPBAR */
+    .topbar {
+      background: #080A0F; height: 64px; padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(184,150,90,0.1);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-title { font-size: 1rem; font-weight: 600; color: var(--white); }
+    .topbar-right { display: flex; align-items: center; gap: 14px; }
+    .topbar-btn {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      padding: 7px 14px; border-radius: 6px;
+      font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.7);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .topbar-btn:hover { border-color: var(--secondary); color: var(--secondary); }
+    .topbar-btn.gold { background: var(--secondary); color: var(--white); border-color: var(--secondary); }
+    .topbar-btn.gold:hover { background: var(--accent); }
+
+    /* CONTENT */
+    .content { padding: 32px; }
+
+    /* KPI BANNER */
+    .kpi-banner {
+      background: linear-gradient(135deg, #1a1520 0%, #0f1018 100%);
+      border: 1px solid rgba(184,150,90,0.15);
+      border-radius: 12px; padding: 28px 32px;
+      margin-bottom: 24px;
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+    }
+    .kpi-item { padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.07); text-align: center; }
+    .kpi-item:first-child { padding-left: 0; }
+    .kpi-item:last-child { border-right: none; }
+    .kpi-label { font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .kpi-value { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--white); line-height: 1; }
+    .kpi-value.gold { color: var(--secondary); }
+    .kpi-value.green { color: var(--success); }
+    .kpi-sub { font-size: 0.7rem; color: rgba(255,255,255,0.25); margin-top: 5px; }
+
+    /* GRID */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .box {
+      background: #080A0F;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 24px;
+    }
+    .box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .box-title { font-size: 0.88rem; font-weight: 700; color: var(--white); }
+    .box-tag { font-size: 0.68rem; color: var(--secondary); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* CHART BAR (CSS only) */
+    .chart-bars { display: flex; align-items: flex-end; gap: 12px; height: 120px; margin-bottom: 8px; }
+    .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+    .chart-bar-bg { width: 100%; background: rgba(255,255,255,0.04); border-radius: 3px 3px 0 0; display: flex; flex-direction: column-reverse; }
+    .chart-bar { background: linear-gradient(to top, var(--secondary) 0%, var(--accent) 100%); border-radius: 3px 3px 0 0; transition: height 1s ease; }
+    .chart-bar-label { font-size: 0.65rem; color: rgba(255,255,255,0.3); }
+    .chart-value { font-size: 0.7rem; color: var(--secondary); font-weight: 700; }
+
+    /* UNIDADES TABLE */
+    .units-table { width: 100%; border-collapse: collapse; }
+    .units-table th {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      padding: 0 12px 10px; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .units-table td { padding: 12px; font-size: 0.85rem; color: rgba(255,255,255,0.7); border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .units-table tr:last-child td { border-bottom: none; }
+    .units-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .td-unit { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--white) !important; }
+    .pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.5px; }
+    .pill-disponivel { background: rgba(16,185,129,0.12); color: var(--success); }
+    .pill-permutada  { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.25); }
+    .pill-vendida    { background: rgba(59,130,246,0.12); color: var(--info); }
+
+    /* RETORNO */
+    .retorno-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .retorno-card {
+      background: rgba(184,150,90,0.06); border: 1px solid rgba(184,150,90,0.15);
+      padding: 16px; border-radius: 6px; text-align: center;
+    }
+    .retorno-value { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--secondary); }
+    .retorno-label { font-size: 0.68rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+    /* DOCS */
+    .docs-list { display: flex; flex-direction: column; gap: 8px; }
+    .doc-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); cursor: pointer; transition: border-color 0.2s; }
+    .doc-item:hover { border-color: rgba(184,150,90,0.3); }
+    .doc-left { display: flex; align-items: center; gap: 10px; }
+    .doc-name { font-size: 0.82rem; color: rgba(255,255,255,0.75); }
+    .doc-date { font-size: 0.68rem; color: rgba(255,255,255,0.25); margin-top: 1px; }
+    .doc-dl { font-size: 0.72rem; color: var(--secondary); }
+
+    /* PROGRESS */
+    .prog-bar { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--secondary), var(--accent)); }
+
+    /* REPORT ITEMS */
+    .report-list { display: flex; flex-direction: column; gap: 10px; }
+    .report-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; border-radius: 6px;
+      font-size: 0.84rem; color: rgba(255,255,255,0.6);
+    }
+    .report-item:nth-child(odd) { background: rgba(255,255,255,0.02); }
+    .report-item-value { font-weight: 700; }
+    .report-item-value.pos { color: var(--success); }
+    .report-item-value.neg { color: var(--danger); }
+    .report-item-value.neu { color: rgba(255,255,255,0.5); }
+    .report-total { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; margin-top: 4px; display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; color: var(--white); }
+
+    /* CHART DONUT CSS */
+    .donut-wrap { display: flex; align-items: center; justify-content: center; gap: 32px; }
+    .donut { width: 120px; height: 120px; border-radius: 50%; background: conic-gradient(var(--secondary) 0% 83.3%, rgba(255,255,255,0.06) 83.3% 100%); position: relative; }
+    .donut-inner { position: absolute; inset: 18px; background: #080A0F; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+    .donut-val { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--secondary); line-height: 1; }
+    .donut-lbl { font-size: 0.6rem; color: rgba(255,255,255,0.3); text-align: center; margin-top: 2px; }
+    .donut-legend { display: flex; flex-direction: column; gap: 8px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* CRONOGRAMA */
+    .cronograma { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .crono-item { text-align: center; }
+    .crono-month { font-size: 0.65rem; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+    .crono-bar { height: 4px; border-radius: 2px; }
+    .crono-bar.done    { background: var(--secondary); }
+    .crono-bar.current { background: var(--accent); }
+    .crono-bar.pending { background: rgba(255,255,255,0.07); }
+    .crono-pct { font-size: 0.62rem; color: rgba(255,255,255,0.25); margin-top: 4px; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1a1a2e; color: white; padding: 12px 22px; border-radius: 6px; font-size: 0.85rem; box-shadow: 0 8px 28px rgba(0,0,0,0.5); transition: transform 0.3s; z-index: 3000; border: 1px solid rgba(184,150,90,0.3); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 1200px) {
+      .kpi-banner { grid-template-columns: repeat(3, 1fr); }
+      .kpi-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.07); }
+      .kpi-item:nth-child(4),
+      .kpi-item:nth-child(5) { margin-top: 20px; }
+    }
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); }
+      .main { margin-left: 0; }
+      .grid-2, .grid-3, .retorno-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo" style="flex-direction:column;align-items:flex-start;gap:6px">
+        <img src="assets/logos/scholl-branco.svg" alt="Scholl" style="height:24px;width:auto;filter:brightness(0) invert(1);opacity:0.9">
+        <span style="font-size:0.58rem;color:var(--secondary);letter-spacing:2px;text-transform:uppercase;opacity:0.8">Portal do Investidor</span>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-badge">✦ Investidor</div>
+      <div class="user-name">Alexandre Contador</div>
+      <div class="user-quota">CLAVE — Cota Preferencial</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Dashboard</div>
+      <div class="nav-item active" onclick="setTab('dashboard')">
+        <span class="nav-item-icon">📊</span> Visão Geral
+      </div>
+      <div class="nav-section">Empreendimento</div>
+      <div class="nav-item" onclick="setTab('obra')">
+        <span class="nav-item-icon">🏗️</span> Obra e Cronograma
+      </div>
+      <div class="nav-item" onclick="setTab('vendas')">
+        <span class="nav-item-icon">🏷️</span> Quadro de Vendas
+      </div>
+      <div class="nav-section">Financeiro</div>
+      <div class="nav-item" onclick="setTab('dre')">
+        <span class="nav-item-icon">💹</span> DRE da SPE
+      </div>
+      <div class="nav-item" onclick="setTab('retorno')">
+        <span class="nav-item-icon">📈</span> Retorno do Investidor
+      </div>
+      <div class="nav-section">Documentos</div>
+      <div class="nav-item" onclick="setTab('docs')">
+        <span class="nav-item-icon">📄</span> Documentos Jurídicos
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html">← Voltar ao site</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title" id="topbarTitle">Visão Geral — CLAVE</div>
+      <div class="topbar-right">
+        <button class="topbar-btn" onclick="showToast('📥 Relatório gerado! Download iniciado.')">⬇️ Exportar Relatório</button>
+        <button class="topbar-btn gold" onclick="window.location='https://wa.me/5551998989927'">💬 Falar com Filipe</button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div id="tab-dashboard">
+        <div class="kpi-banner">
+          <div class="kpi-item">
+            <div class="kpi-label">VGV Total</div>
+            <div class="kpi-value gold">R$ 8,6M</div>
+            <div class="kpi-sub">Tabela vigente Mai/26</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Unidades Disponíveis</div>
+            <div class="kpi-value">5/6</div>
+            <div class="kpi-sub">1 permutada (terreno)</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Obra Concluída</div>
+            <div class="kpi-value gold">32%</div>
+            <div class="kpi-sub">Estrutura em andamento</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Margem estimada</div>
+            <div class="kpi-value green">~20%</div>
+            <div class="kpi-sub">Sobre VGV líquido</div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">Previsão de entrega</div>
+            <div class="kpi-value" style="font-size:1.2rem;">Dez/2026</div>
+            <div class="kpi-sub">Habite-se estimado</div>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <!-- VENDAS DONUT -->
+          <div class="box">
+            <div class="box-header">
+              <div class="box-title">Quadro de Vendas</div>
+              <div class="box-tag" onclick="setTab('vendas')" style="cursor:pointer;">Ver detalhe →</div>
+            </div>
+            <div class="donut-wrap">
+              <div class="donut">
+                <div class="donut-inner">
+                  <div class="donut-val">1</div>
+                  <div class="donut-lbl">vendida</div>
+                </div>
+              </div>
+              <div class="donut-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--secondary)"></div>Permutada: 1 un.</div>
+                <div class="legend-item"><div class="legend-dot" style="background:rgba(16,185,129,0.7)"></div>Disponível: 5 un.</div>
+                <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.1)"></div>Total: 6 unidades</div>
+              </div>
+            </div>
+            <div style="margin-top:20px;padding:14px;background:rgba(184,150,90,0.07);border-radius:6px;text-align:center;">
+              <div style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin-bottom:4px;">VGV disponível</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--secondary);">R$ 7,6M</div>
+            </div>
+          </div>
+
+          <!-- CRONOGRAMA VISUAL -->
+          <div class="box">
+            <div class="box-header">
+              <div class="box-title">Progresso da Obra</div>
+              <div class="box-tag">32% concluído</div>
+            </div>
+            <div style="margin-bottom:16px;">
+              <div class="prog-bar"><div class="prog-fill" style="width:32%"></div></div>
+              <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:rgba(255,255,255,0.25);margin-top:6px;">
+                <span>Nov 2024</span><span>Dez 2026</span>
+              </div>
+            </div>
+            <div class="cronograma">
+              <div class="crono-item"><div class="crono-month">N/24</div><div class="crono-bar done"></div></div>
+              <div class="crono-item"><div class="crono-month">F/25</div><div class="crono-bar done"></div></div>
+              <div class="crono-item"><div class="crono-month">M/25</div><div class="crono-bar done"></div></div>
+              <div class="crono-item"><div class="crono-month">J/25</div><div class="crono-bar done"></div></div>
+              <div class="crono-item"><div class="crono-month">S/25</div><div class="crono-bar done"></div></div>
+              <div class="crono-item"><div class="crono-month">M/26</div><div class="crono-bar current"></div></div>
+              <div class="crono-item"><div class="crono-month">A/26</div><div class="crono-bar pending"></div></div>
+              <div class="crono-item"><div class="crono-month">S/26</div><div class="crono-bar pending"></div></div>
+              <div class="crono-item"><div class="crono-month">O/26</div><div class="crono-bar pending"></div></div>
+              <div class="crono-item"><div class="crono-month">N/26</div><div class="crono-bar pending"></div></div>
+              <div class="crono-item"><div class="crono-month">D/26</div><div class="crono-bar pending"></div></div>
+              <div class="crono-item"><div class="crono-month">✓</div><div class="crono-bar pending"></div></div>
+            </div>
+            <div style="margin-top:20px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;color:rgba(255,255,255,0.5);">
+                <span>🟡 Etapa atual</span><span style="color:var(--secondary);font-weight:600;">Estrutura 3º/4º pav.</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;color:rgba(255,255,255,0.5);">
+                <span>📅 Última atualização</span><span>20/05/2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- VELOCIDADE DE VENDAS -->
+          <div class="box">
+            <div class="box-header">
+              <div class="box-title">📊 Projeção de Receitas</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+              <div style="text-align:center;padding:12px 8px;background:rgba(255,255,255,0.03);border-radius:6px;">
+                <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--secondary);">R$ 945K</div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:4px;">Permuta terreno</div>
+              </div>
+              <div style="text-align:center;padding:12px 8px;background:rgba(255,255,255,0.03);border-radius:6px;">
+                <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--white);">R$ 7,6M</div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:4px;">Vendas abertas</div>
+              </div>
+              <div style="text-align:center;padding:12px 8px;background:rgba(255,255,255,0.03);border-radius:6px;">
+                <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--white);">R$ 8,6M</div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:4px;">VGV total</div>
+              </div>
+              <div style="text-align:center;padding:12px 8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);border-radius:6px;">
+                <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--success);">R$ 1,7M</div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:4px;">Lucro estimado</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;color:rgba(255,255,255,0.4);padding:10px 12px;background:rgba(255,255,255,0.02);border-radius:6px;">
+              <span>Margem sobre VGV líquido</span>
+              <span style="color:var(--success);font-weight:700;">~20%</span>
+            </div>
+          </div>
+
+          <!-- ÚLTIMAS AÇÕES -->
+          <div class="box">
+            <div class="box-header"><div class="box-title">📋 Últimas Movimentações</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;background:rgba(184,150,90,0.05);border-radius:6px;">
+                <div style="font-size:1rem;">📷</div>
+                <div>
+                  <div style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Fotos semanais adicionadas — 20 fotos</div>
+                  <div style="font-size:0.7rem;color:rgba(255,255,255,0.3);margin-top:2px;">20/05/2026</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;">
+                <div style="font-size:1rem;">🏗️</div>
+                <div>
+                  <div style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Concretagem 3º pavimento concluída</div>
+                  <div style="font-size:0.7rem;color:rgba(255,255,255,0.3);margin-top:2px;">20/05/2026</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;">
+                <div style="font-size:1rem;">📄</div>
+                <div>
+                  <div style="font-size:0.82rem;color:rgba(255,255,255,0.8);">Relatório mensal de obra — Abril 2026</div>
+                  <div style="font-size:0.7rem;color:rgba(255,255,255,0.3);margin-top:2px;">02/05/2026</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;">
+                <div style="font-size:1rem;">💰</div>
+                <div>
+                  <div style="font-size:0.82rem;color:rgba(255,255,255,0.8);">DRE da SPE atualizado — Abril 2026</div>
+                  <div style="font-size:0.7rem;color:rgba(255,255,255,0.3);margin-top:2px;">01/05/2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VENDAS TAB -->
+      <div id="tab-vendas" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:24px;">🏷️ Quadro de Vendas — CLAVE</h2>
+        <div class="box">
+          <div class="box-header"><div class="box-title">Tabela de Unidades — Atualizada em 22/05/2026</div></div>
+          <table class="units-table">
+            <thead>
+              <tr>
+                <th>Unidade</th><th>Tipo</th><th>Área</th><th>Tabela</th><th>Preço/m²</th><th>Status</th><th>Investidor c/ Desc.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-unit">201</td><td>Residencial</td><td>155,85 m²</td><td>R$ 1.240.344</td><td>R$ 7.959</td><td><span class="pill pill-disponivel">Disponível</span></td><td style="color:var(--secondary);font-weight:600;">R$ 1.169.100</td></tr>
+              <tr><td class="td-unit">201-D</td><td>Duplex</td><td>200,49 m²</td><td>R$ 1.776.024</td><td>R$ 8.858</td><td><span class="pill pill-disponivel">Disponível</span></td><td style="color:var(--secondary);font-weight:600;">R$ 1.602.750</td></tr>
+              <tr><td class="td-unit">301-D</td><td>Duplex</td><td>125,49 m²</td><td>R$ 1.505.880</td><td>R$ 12.000</td><td><span class="pill pill-disponivel">Disponível</span></td><td style="color:var(--secondary);font-weight:600;">R$ 1.380.000</td></tr>
+              <tr style="opacity:0.4"><td class="td-unit">401</td><td>Residencial</td><td>80,85 m²</td><td>R$ 970.200</td><td>R$ 12.000</td><td><span class="pill pill-permutada">Permutada</span></td><td>—</td></tr>
+              <tr><td class="td-unit">501-D</td><td>Duplex</td><td>129,61 m²</td><td>R$ 1.555.320</td><td>R$ 12.000</td><td><span class="pill pill-disponivel">Disponível</span></td><td style="color:var(--secondary);font-weight:600;">R$ 1.425.000</td></tr>
+              <tr><td class="td-unit">502-D</td><td>Duplex</td><td>133,18 m²</td><td>R$ 1.598.160</td><td>R$ 12.000</td><td><span class="pill pill-disponivel">Disponível</span></td><td style="color:var(--secondary);font-weight:600;">R$ 1.462.500</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:20px;padding:16px;background:rgba(184,150,90,0.06);border:1px solid rgba(184,150,90,0.15);border-radius:6px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;text-align:center;">
+              <div><div style="font-size:0.65rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">VGV total</div><div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--secondary);font-weight:700;">R$ 8.645.928</div></div>
+              <div><div style="font-size:0.65rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Disponível para venda</div><div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);font-weight:700;">R$ 7.675.728</div></div>
+              <div><div style="font-size:0.65rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Área total privativa</div><div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);font-weight:700;">825,47 m²</div></div>
+            </div>
+          </div>
+          <div style="font-size:0.72rem;color:rgba(255,255,255,0.2);margin-top:12px;">* Preço de investidor com desconto aproximado de R$ 7.500/m² para parceiros com capital. Consulte condições via WhatsApp.</div>
+        </div>
+      </div>
+
+      <!-- DRE TAB -->
+      <div id="tab-dre" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:24px;">💹 DRE da SPE — CLAVE</h2>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.3);margin-bottom:20px;">Período: Novembro 2024 — Maio 2026 (realizado parcial)</div>
+        <div class="box">
+          <div class="box-header"><div class="box-title">Demonstrativo de Resultado — SPE CLAVE</div><div class="box-tag">Atualizado Mai/26</div></div>
+          <div class="report-list">
+            <div class="report-item" style="background:rgba(184,150,90,0.05);font-weight:700;color:white;">
+              <span>RECEITA</span><span></span>
+            </div>
+            <div class="report-item"><span>VGV total projetado</span><span class="report-item-value pos">R$ 8.645.928</span></div>
+            <div class="report-item"><span>Receita de permuta (terreno)</span><span class="report-item-value pos">R$ 945.000</span></div>
+            <div class="report-item"><span>Receita de vendas (projetado)</span><span class="report-item-value neu">R$ 7.700.928</span></div>
+            <div class="report-item" style="margin-top:8px;background:rgba(184,150,90,0.05);font-weight:700;color:white;">
+              <span>DESPESAS</span><span></span>
+            </div>
+            <div class="report-item"><span>Custo de construção (estimado)</span><span class="report-item-value neg">R$ 5.066.160</span></div>
+            <div class="report-item"><span>Projetos e incorporação</span><span class="report-item-value neg">R$ 518.273</span></div>
+            <div class="report-item"><span>Comissão de vendas (5%)</span><span class="report-item-value neg">R$ 220.500</span></div>
+            <div class="report-item"><span>Marketing e publicidade</span><span class="report-item-value neg">R$ 22.050</span></div>
+            <div class="report-item"><span>Jurídico e contabilidade</span><span class="report-item-value neg">R$ 62.000</span></div>
+            <div class="report-item"><span>ITBI, registro e cartório</span><span class="report-item-value neg">R$ 54.000</span></div>
+            <div class="report-item"><span>Despesa com terreno (permuta)</span><span class="report-item-value neg">R$ 945.000</span></div>
+            <div class="report-item"><span>Outros custos (contingência 3%)</span><span class="report-item-value neg">R$ 175.700</span></div>
+            <div class="report-total">
+              <span>RESULTADO PROJETADO</span>
+              <span style="color:var(--success);">R$ 1.752.940 ≈ 20,3%</span>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding:14px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.15);border-radius:6px;font-size:0.78rem;color:rgba(255,255,255,0.4);">
+            ⚠️ Valores projetados com base no VGV de tabela e estimativa de custos de construção a R$ 4.000/m² acabado. Valores realizados disponíveis no relatório mensal.
+          </div>
+        </div>
+      </div>
+
+      <!-- RETORNO TAB -->
+      <div id="tab-retorno" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:24px;">📈 Retorno do Investidor</h2>
+        <div class="grid-2">
+          <div class="box">
+            <div class="box-header"><div class="box-title">Simulação de Retorno — Cota Preferencial</div></div>
+            <div class="retorno-grid">
+              <div class="retorno-card">
+                <div class="retorno-value">~25%</div>
+                <div class="retorno-label">Rentabilidade total</div>
+              </div>
+              <div class="retorno-card">
+                <div class="retorno-value">~12%</div>
+                <div class="retorno-label">TIR anualizada</div>
+              </div>
+              <div class="retorno-card">
+                <div class="retorno-value">24 meses</div>
+                <div class="retorno-label">Prazo médio</div>
+              </div>
+              <div class="retorno-card">
+                <div class="retorno-value">Selic +4%</div>
+                <div class="retorno-label">Vs. renda fixa</div>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-header"><div class="box-title">Distribuição Projetada (por R$ 250k investidos)</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.85rem;">
+                <span style="color:rgba(255,255,255,0.5);">Capital investido</span>
+                <span style="color:white;font-weight:600;">R$ 250.000</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.85rem;">
+                <span style="color:rgba(255,255,255,0.5);">Retorno estimado (25%)</span>
+                <span style="color:var(--success);font-weight:600;">+ R$ 62.500</span>
+              </div>
+              <div style="height:1px;background:rgba(255,255,255,0.06);margin:4px 0;"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.92rem;font-weight:700;">
+                <span style="color:white;">Total recebido</span>
+                <span style="color:var(--secondary);">R$ 312.500</span>
+              </div>
+              <div style="margin-top:12px;padding:12px;background:rgba(184,150,90,0.07);border-radius:6px;font-size:0.78rem;color:rgba(255,255,255,0.4);">
+                📌 Comparativo: Selic 12% a.a. = R$ 275.560 em 24 meses. O CLAVE projeta R$ 312.500 no mesmo período.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCS TAB -->
+      <div id="tab-docs" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:24px;">📄 Documentos Jurídicos</h2>
+        <div class="box">
+          <div class="box-header"><div class="box-title">Documentação da Incorporação — CLAVE</div></div>
+          <div class="docs-list">
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div style="font-size:1.1rem;">🏢</div><div><div class="doc-name">Memorial de Incorporação — CLAVE</div><div class="doc-date">Arquivado no RI — Nov 2024</div></div></div>
+              <div class="doc-dl">⬇️ PDF</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div style="font-size:1.1rem;">📝</div><div><div class="doc-name">Contrato Social SPE — CLAVE Empreendimentos Ltda</div><div class="doc-date">Registrado na Junta Comercial RS — Nov 2024</div></div></div>
+              <div class="doc-dl">⬇️ PDF</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div style="font-size:1.1rem;">🤝</div><div><div class="doc-name">Acordo de Sócios e Investidores</div><div class="doc-date">Assinado Nov 2024</div></div></div>
+              <div class="doc-dl">⬇️ PDF</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div style="font-size:1.1rem;">🏗️</div><div><div class="doc-name">Alvará de Construção — Prefeitura POA</div><div class="doc-date">Emitido Jan 2025</div></div></div>
+              <div class="doc-dl">⬇️ PDF</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div style="font-size:1.1rem;">📊</div><div><div class="doc-name">Relatório Mensal de Obra — Abril 2026</div><div class="doc-date">Emitido 02/05/2026</div></div></div>
+              <div class="doc-dl">⬇️ PDF</div>
+            </div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')">
+              <div class="doc-left"><div style="font-size:1.1rem;">📐</div><div><div class="doc-name">Projetos aprovados (Arquitetônico, Estrutural, Hidro, Elétrico)</div><div class="doc-date">Aprovados Dez 2024</div></div></div>
+              <div class="doc-dl">⬇️ ZIP</div>
+            </div>
+          </div>
+        </div>
+        <div class="box" style="margin-top:20px;">
+          <div class="box-header"><div class="box-title">Relatórios Mensais de Obra</div></div>
+          <div class="docs-list">
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')"><div class="doc-left"><div style="font-size:1rem;">📊</div><div><div class="doc-name">Relatório Abril 2026</div><div class="doc-date">02/05/2026</div></div></div><div class="doc-dl">⬇️</div></div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')"><div class="doc-left"><div style="font-size:1rem;">📊</div><div><div class="doc-name">Relatório Março 2026</div><div class="doc-date">02/04/2026</div></div></div><div class="doc-dl">⬇️</div></div>
+            <div class="doc-item" onclick="showToast('📄 Download iniciado…')"><div class="doc-left"><div style="font-size:1rem;">📊</div><div><div class="doc-name">Relatório Fevereiro 2026</div><div class="doc-date">02/03/2026</div></div></div><div class="doc-dl">⬇️</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OBRA TAB -->
+      <div id="tab-obra" style="display:none">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:24px;">🏗️ Obra e Cronograma</h2>
+        <div class="box">
+          <div class="box-header"><div class="box-title">Cronograma Executivo — CLAVE</div></div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:16px;padding:14px;background:rgba(16,185,129,0.06);border-radius:6px;border-left:3px solid var(--success);">
+              <div style="font-size:1.2rem;">✅</div>
+              <div style="flex:1;">
+                <div style="font-size:0.85rem;color:white;font-weight:600;">Fundações e Contenções</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:2px;">Jan–Ago 2025</div>
+              </div>
+              <div style="font-size:0.8rem;color:var(--success);font-weight:700;">100%</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;padding:14px;background:rgba(184,150,90,0.06);border-radius:6px;border-left:3px solid var(--secondary);">
+              <div style="font-size:1.2rem;">🔄</div>
+              <div style="flex:1;">
+                <div style="font-size:0.85rem;color:white;font-weight:600;">Estrutura — Em andamento</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:2px;">Set 2025 – Ago 2026</div>
+                <div class="prog-bar" style="margin-top:8px;"><div class="prog-fill" style="width:60%"></div></div>
+              </div>
+              <div style="font-size:0.8rem;color:var(--secondary);font-weight:700;">60%</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;padding:14px;border-radius:6px;border-left:3px solid rgba(255,255,255,0.1);opacity:0.5;">
+              <div style="font-size:1.2rem;">⏳</div>
+              <div style="flex:1;"><div style="font-size:0.85rem;color:white;font-weight:600;">Alvenaria e Vedações</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:2px;">Ago–Out 2026</div></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.3);font-weight:700;">0%</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;padding:14px;border-radius:6px;border-left:3px solid rgba(255,255,255,0.1);opacity:0.5;">
+              <div style="font-size:1.2rem;">⏳</div>
+              <div style="flex:1;"><div style="font-size:0.85rem;color:white;font-weight:600;">Instalações Hidro/Elétrica/Gás</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:2px;">Set–Nov 2026</div></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.3);font-weight:700;">0%</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;padding:14px;border-radius:6px;border-left:3px solid rgba(255,255,255,0.1);opacity:0.5;">
+              <div style="font-size:1.2rem;">⏳</div>
+              <div style="flex:1;"><div style="font-size:0.85rem;color:white;font-weight:600;">Acabamento e Entrega</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:2px;">Nov–Dez 2026</div></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.3);font-weight:700;">0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const tabs = ['dashboard','obra','vendas','dre','retorno','docs'];
+  const tabTitles = { dashboard:'Visão Geral — CLAVE', obra:'Obra e Cronograma', vendas:'Quadro de Vendas', dre:'DRE da SPE', retorno:'Retorno do Investidor', docs:'Documentos Jurídicos' };
+
+  function setTab(name) {
+    tabs.forEach(t => {
+      const el = document.getElementById('tab-' + t);
+      if (el) el.style.display = (t === name) ? '' : 'none';
+    });
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('onclick') && el.getAttribute('onclick').includes("'" + name + "'"));
+    });
+    document.getElementById('topbarTitle').textContent = tabTitles[name] || name;
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+</script>
+</body>
+</html>
